@@ -1,0 +1,106 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "quefaire-livingstyleguide@git+ssh://git@46.18.195.231:root/quefaire-v2-styleguide.git#master",
+        "scope": null,
+        "escapedName": "quefaire-livingstyleguide",
+        "name": "quefaire-livingstyleguide",
+        "rawSpec": "git+ssh://git@46.18.195.231:root/quefaire-v2-styleguide.git#master",
+        "spec": "ssh://git@46.18.195.231:root/quefaire-v2-styleguide.git#master",
+        "type": "git"
+      },
+      "C:\\Users\\Mondher\\Desktop\\quefaire.paris.fr\\quefaire-v2-bo"
+    ]
+  ],
+  "_from": "git+ssh://git@46.18.195.231:root/quefaire-v2-styleguide.git#master",
+  "_id": "quefaire-livingstyleguide@0.0.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/quefaire-livingstyleguide",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "quefaire-livingstyleguide@git+ssh://git@46.18.195.231:root/quefaire-v2-styleguide.git#master",
+    "scope": null,
+    "escapedName": "quefaire-livingstyleguide",
+    "name": "quefaire-livingstyleguide",
+    "rawSpec": "git+ssh://git@46.18.195.231:root/quefaire-v2-styleguide.git#master",
+    "spec": "ssh://git@46.18.195.231:root/quefaire-v2-styleguide.git#master",
+    "type": "git"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+ssh://git@46.18.195.231:root/quefaire-v2-styleguide.git#b8cd8e0cc73d7438efb7739990760d2d98acb7f0",
+  "_shasum": "d08e7db214babedee5c21767abed60ec20f91562",
+  "_shrinkwrap": null,
+  "_spec": "quefaire-livingstyleguide@git+ssh://git@46.18.195.231:root/quefaire-v2-styleguide.git#master",
+  "_where": "C:\\Users\\Mondher\\Desktop\\quefaire.paris.fr\\quefaire-v2-bo",
+  "author": {
+    "name": "Hans Lemuet",
+    "email": "hans@etaminstudio.com"
+  },
+  "contributors": [
+    {
+      "name": "Adrien Nicod"
+    },
+    {
+      "name": "Nicolas Dias"
+    }
+  ],
+  "dependencies": {},
+  "description": "Que Faire à Paris Living Style Guide",
+  "devDependencies": {
+    "@lukekarrys/jade-runtime": "^1.11.1",
+    "autoprefixer": "^6.2.3",
+    "breakpoint-sass": "^2.6.1",
+    "browserify": "^13.0.1",
+    "css-toggle-switch": "^4.0.2",
+    "del": "^2.2.0",
+    "fastclick": "^1.0.6",
+    "flickity": "^1.1.2",
+    "flickity-imagesloaded": "^1.0.2",
+    "gulp": "^3.8.11",
+    "gulp-filter": "^4.0.0",
+    "gulp-imagemin": "^3.0.1",
+    "gulp-postcss": "^6.0.1",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.5.0",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.4",
+    "harp": "^0.20.1",
+    "jade": "^1.9.2",
+    "jadeify": "^4.6.0",
+    "js-cookie": "^2.1.0",
+    "mapbox.js": "^2.4.0",
+    "pixrem": "^3.0.0",
+    "pubsub-js": "^1.5.0",
+    "run-sequence": "^1.1.0",
+    "susy": "~2.2.2",
+    "templatizer": "^2.0.2",
+    "velocity-animate": "~1.2.2",
+    "vinyl": "^1.1.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  },
+  "gitHead": "b8cd8e0cc73d7438efb7739990760d2d98acb7f0",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "quefaire-livingstyleguide",
+  "optionalDependencies": {},
+  "private": true,
+  "readme": "# Living Style Guide\n\n## Getting started\n\nInstall [Harp](http://harpjs.com):\n\n    npm install -g harp\n\nAnd Browserify\n\n    npm install -g browserify watchify\n\nAnd browser-sync (*)\n\n    npm install -g browser-sync\n\n(*) You may not need browser-sync, it can be a bit complicated to [install on Windows](http://www.browsersync.io/docs/#windows-users) and is only needed if you want your pages to auto-reload on code changes.\n\nAnd the project dependencies (run this command from the project folder)\n\n    npm install\n\n\n## Development mode\n\n    npm start\n\nThis launches a local server at http://localhost:9000\nThe server is proxied on http://localhost:3000 by browser-sync with the auto-reload on code changes.\n\n\n## Compile a static version\n\n    npm run compile\n\n\n## Build the styleguide\n\n    npm run build\n\nThis task will:\n* compile all SCSS files into a single `./build/assets/css/styleguide.css`\n* compile all JS files into a single `./build/assets/javascript/project.js`\n* copy `./src/javascript/config.js` to `./build/assets/javascript/config.js` without modification\n* copy `./src/javascript/locales.js` to `./build/assets/javascript/locales.js` without modification\n* copy all webfont files to `./build/assets/fonts/`\n* optimize and copy all images (png, jpg, svg, gif) to `./build/assets/images/` while preserving the original tree structure\n* copy all jade and json files to `./build/jade/` while preserving the original tree structure\n* copy `./src/layouts/_wrapper.jade` to `./build/jade/layouts/wrapper.jade` without modification\n\n### Use the build in another project\n\nRun `npm link` in this folder\n\nRun `npm link my-styleguide` in the other project\n\nYou'll get the my-styleguide project symbolically linked in the other project `node_modules`.\n\nIf it's an Express project you can do something like:\n\n    app.set('views', [app.get('views'), path.join(__dirname, 'node_modules', 'my-styleguide', 'build', 'jade') ]);\n\nto be able to render Jade templates coming from the styleguide. \\o/\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git@git.etaminstud.io:paris/quefaire-livingstyleguide.git"
+  },
+  "scripts": {
+    "build": "gulp cleanbuild",
+    "compile": "gulp compile",
+    "start": "gulp default"
+  },
+  "version": "0.0.1"
+}
