@@ -1,0 +1,31 @@
+<ul class="controls-panel controls-panel-page">
+    <li>
+        <a ng-class="fiches.data.title.length>1 && fiches.data.leadText.length>1 && fiches.data.mainMedia ? 'complete' : ''" data-href="pages-section-quoi" ng-click="fiches.navto('pages-section-quoi')">Quoi ?</a>
+    </li>
+    <li ng-show="fiches.data.id">
+        <a ng-class="fiches.data.place.name.length>1 ? 'complete' : ''" data-href="pages-section-ou" ng-click="fiches.navto('pages-section-ou')" ng-if="fiches.data.type.id<3">Où ?</a>
+    </li>
+
+    <li ng-show="fiches.data.id && fiches.data.type.id==1">
+        <!-- QUAND EVENEMENT -->
+        <a ng-class="(fiches.data.event.periodes[0].dateEnd && fiches.data.event.periodes[0].seances[0].hourEnd) ? 'complete' : ''"  data-href="pages-section-quand"ng-click="fiches.navto('pages-section-quand')" >Quand ?</a>
+    </li>
+    <li ng-show="fiches.data.id && fiches.data.type.id==2">
+        <!-- QUAND ACTIVITES -->
+        <a ng-class="(fiches.data.activity.dateEnd) ? 'complete' : ''"  data-href="pages-section-quand"ng-click="fiches.navto('pages-section-quand')" >Quand ?</a>
+    </li>
+        <li ng-show="fiches.data.id && fiches.data.type.id==3">
+        <!-- QUAND PROGRAMME -->
+        <a ng-class="(fiches.data.event.realDateEnd) ? 'complete' : ''"  data-href="pages-section-quand"ng-click="fiches.navto('pages-section-quand')" >Quand ?</a>
+    </li>
+     
+    <li ng-show="fiches.data.id">
+        <a ng-class="fiches.data.modality.priceType.length > 1 &&  fiches.data.modality.accessType.length > 1 ? 'complete' : ''" data-href="pages-section-modalites" ng-click="fiches.navto('pages-section-modalites')" ng-if="fiches.data.type.id<3">Modalités</a>
+    </li>
+    <li ng-show="fiches.data.id">
+        <a ng-class="fiches.data.contact.name.length > 1 ? 'complete' : ''" data-href="pages-section-contact" ng-click="fiches.navto('pages-section-contact')" ng-if="fiches.data.type.id!=3">Contact</a>
+    </li>
+    <li ng-show="fiches.data.id">
+        <a data-href="pages-section-finaliser" ng-click="fiches.navto('pages-section-finaliser')">Finaliser</a>
+    </li>
+</ul>

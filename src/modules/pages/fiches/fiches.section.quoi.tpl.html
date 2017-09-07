@@ -1,0 +1,56 @@
+<section class="section-pages" id="pages-section-quoi">
+    <h2>1 - Quoi ?<sup>*</sup></h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="title">Titre <span class="required">*</span> </label>
+                    <i class="fa fa-info-circle pull-right" aria-hidden="true" tooltip-placement="left" uib-tooltip="{{fiches.infobullesTitre}}" tooltip-trigger="outsideClick" ng-if="fiches.infobullesTitre"></i>
+                    <input type="text" class="form-control" placeholder="60 caractères max" maxlength="250" name="title" ng-model="fiches.data.title" tooltip-placement="top-right" uib-tooltip="{{fiches.infobullesTitre}}" tooltip-trigger="focus" required tabindex="1">
+                </div>
+                <div class="form-group" ng-show="fiches.data.id">
+                    <label for="title">Chapeau <span class="required">*</span></label>
+                    <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{fiches.infobullesChapeau}}" tooltip-placement="left"  tooltip-trigger="outsideClick" ng-if="fiches.infobullesChapeau"></i>
+                    <textarea placeholder="360 caractères max" tabindex="2" class="form-control" name="chapeau" rows="4" ng-model="fiches.data.leadText" maxlength="360" uib-tooltip="{{fiches.infobullesChapeau}}" tooltip-placement="top-right"  tooltip-trigger="focus" required tabindex="2"></textarea>
+                    <em>{{360-fiches.data.leadText.length}} caractères restants</em>
+                </div>
+            </div>
+            <div class="col-md-6" ng-show="fiches.data.id">
+                <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{fiches.infobullesImage}}" style="margin-top:-15px;" tooltip-placement="left" tooltip-trigger="outsideClick" ng-if="fiches.infobullesImage"></i>
+                <div class="form-group wrapper-add-image">
+                    <!-- TODO -->
+                    <div class="no-image" ng-if="!fiches.data.mainMedia"></div>
+                    <img ng-if="fiches.data.mainMedia" alt="{{fiches.data.mainMedia.alt}}" ng-src="{{fiches.data.mainMedia | path: 'Small'}}" class="image">
+                    <div class="wrapper-controls">
+                        <button type="button" class="btn btn-qufaire-primary-inversed js-btn-add-image" ng-click="fiches.openMediaLib($event, this)" uib-tooltip="{{fiches.infobullesImage}}" tooltip-placement="top-right" tooltip-trigger="mouseenter"><span ng-if="!fiches.data.mainMedia">Ajouter une image</span><span ng-if="fiches.data.mainMedia">Changer l'image</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="fiches.data.id">
+            <div class="col-md-12">
+                <label for="texte">Texte principal <span class="required">*</span></label>
+                <i class="fa fa-info-circle " aria-hidden="true" uib-tooltip="{{fiches.infobullesTexte}}" tooltip-placement="left" tooltip-trigger="outsideClick" ng-if="fiches.infobullesTexte"></i>
+                <div class=" js-wrapper-component wrapper-component" placeholder="nombre de caractères max">
+                  <section class="fiches-components" ng-if="fiches.data.type.id==2">
+                  <components-editor class="components-editor"
+                                     structure="fiches.data.components"
+                                     config="fiches.editorConfigActivite"
+                                     on-parse="fiches.cpntEditorParse(structure, anchors)" uib-tooltip="{{fiches.infobullesTexte}}" tooltip-placement="top-left"  >
+                  </components-editor>
+                </section> 
+                <section class="fiches-components" ng-if="fiches.data.type.id==1 || fiches.data.type.id==3">
+                  <components-editor class="components-editor"
+                                     structure="fiches.data.components"
+                                     config="fiches.editorConfigProgrammeEvenement"
+                                     on-parse="fiches.cpntEditorParse(structure, anchors)" uib-tooltip="{{fiches.infobullesTexte}}" tooltip-placement="top-left"  >
+                  </components-editor>
+                </section>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="!fiches.data.id">
+            <div class="col-md-12">
+                <button ng-click="fiches.createFiches(fiches.data)" type="button" class="btn btn-lg btn-primary btn-quefaire-publier" ng-disabled="fiches.isCreating" >Enregistrer</button>
+            </div>
+        </div>
+</section>

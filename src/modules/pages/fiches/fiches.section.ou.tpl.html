@@ -1,0 +1,110 @@
+        <section class="section-pages" id="pages-section-ou">
+            <h2>2 - Où ?<sup>*</sup></h2>
+            <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{fiches.infobullesOu}}" tooltip-placement="left" style="margin-top:-30px" tooltip-trigger="outsideClick" ng-if="fiches.infobullesOu"></i>
+            <div class="row search-lieu">
+                <div class="col-md-6">
+                    <div class="form-group form-inline">
+                        <input id="form-search-lieu" name="form-search-lieu" type="text" placeholder="Rechercher un lieu" ng-disabled="fiches.data.place.name" ng-model="fiches.lieu.q" ng-change="fiches.searchLieux()" class="form-control" tooltip-placement="top-right" uib-tooltip="{{fiches.infobullesOu}}" tooltip-trigger="focus" >
+                        <button type="button" class="btn btn-qufaire-primary-inversed" ng-if="fiches.data.place.idLieux!=0" ng-click="fiches.changeLieux()" ng-show="fiches.data.place.name || fiches.lieu.newlieu">Changer de lieu</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-inline">
+                        <span>Pas trouvé votre lieu ?</span>
+                        <button type="button" ng-click="fiches.ajoutLieux()" class="btn btn-qufaire-primary-inversed">Ajouter un nouveau lieu</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row results-lieu" ng-if="fiches.lieu.results.length>0 && !fiches.data.place.idLieux">
+                <div class="col-md-12">
+                    <table class="table-hover table-condensed">
+                        <tr ng-repeat="result in fiches.lieu.results" ng-click="fiches.selectLieux(result)">
+                            <td>{{result.name}}</td>
+                            <td>{{result.address}} {{result.zipCode}} {{result.city}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row wrapper-lieu" ng-show="fiches.data.place.name || fiches.lieu.newlieu">
+                <div class="col-md-6 form-horizontal" > 
+                    <input type="hidden" ng-model="fiches.data.place.idLieux" />
+                    <div class="form-group">
+                        <label for="lieu-title" class="col-sm-3">Nom du lieu *</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="lieu-name" id="lieu-name" ng-disabled="!fiches.lieu.newlieu" class="form-control" ng-model="fiches.data.place.name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-sm-3">Adresse</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="lieu-address" id="lieu-address" ng-disabled="!fiches.lieu.newlieu" class="form-control" ng-model="fiches.data.place.address" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="code_postal" class="col-sm-3">Code postal</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="lieu-zipcode" id="lieu-zipcode" ng-disabled="!fiches.lieu.newlieu" class="form-control" ng-model="fiches.data.place.zipCode" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ville" class="col-sm-3">Ville</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="lieu-city" id="lieu-city" ng-disabled="!fiches.lieu.newlieu" class="form-control" ng-model="fiches.data.place.city" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="metro" class="col-sm-3">Lat</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" disabled="disabled" ng-model="fiches.data.place.lat" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="metro" class="col-sm-3">Lon</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" disabled="disabled" ng-model="fiches.data.place.lon" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 form-horizontal">
+                    <div class="form-group">
+                        <label for="metro" class="col-sm-3">Métro</label>
+                        <div class="col-sm-9">
+                            <textarea placeholder="" class="form-control" name="lieu-metros" id="lieu-metros" rows="2" ng-model="fiches.data.place.metro"  ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus" class="col-sm-3">Bus</label>
+                        <div class="col-sm-9">
+                            <textarea placeholder="" class="form-control" name="lieu-bus" id="lieu-bus" rows="2" ng-model="fiches.data.place.bus"  ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="rer" class="col-sm-3">RER</label>
+                        <div class="col-sm-9">
+                            <textarea placeholder="" class="form-control" name="lieu-bus" id="lieu-bus" rows="2" ng-model="fiches.data.place.rer"  ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <label class="checkbox-inline" for="wheelchair">
+                                <input type="checkbox" ng-model="fiches.data.place.pmr" id="lieu-wheelchair" id="lieu-wheelchair"  ng-true-value="1" ng-false-value="0"> <i class="fa fa-wheelchair" uib-tooltip="Accessible aux personnes à mobilité réduite" tooltip-placement="right-top" tooltip-trigger="outsideClick"></i>
+                            </label>
+                            <label class="checkbox-inline" for="eye-slash">
+                                <input type="checkbox" ng-model="fiches.data.place.blind"  id="lieu-eye-slash"  ng-true-value="1" ng-false-value="0"> <i uib-tooltip="Accessible aux personnes déficientes visuelles" tooltip-placement="right-top" class="fa fa-eye-slash" tooltip-trigger="outsideClick"></i>
+                            </label>
+
+                            <label class="checkbox-inline" for="microphone-slash">
+                                <input type="checkbox" ng-model="fiches.data.place.deaf" id="lieu-microphone-slash"  ng-true-value="1" ng-false-value="0"> <i tooltip-placement="right-top" uib-tooltip="Accessible aux personnes déficientes auditives" class="fa fa-microphone-slash" tooltip-trigger="outsideClick"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="wrapper-controls">
+                        <button type="button" class="btn btn-qufaire-primary-inversed" ng-click="fiches.placerCarte();" ng-if="fiches.data.place.address && fiches.data.place.zipCode"><i class="fa fa-map-marker" ></i> Placer sur la carte</button>
+                        <button type="button" class="btn btn-default btn-qufaire-primary" ng-show="fiches.lieu.newlieu" uib-tooltip="un mail sera envoyé à un responsable de la base lieu">Proposer ce lieu</button>
+                    </div>
+                </div>
+            </div>
+        </section>

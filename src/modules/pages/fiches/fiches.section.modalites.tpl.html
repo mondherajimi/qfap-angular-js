@@ -1,0 +1,110 @@
+<section class="section-pages" id="pages-section-modalites">
+    <h2>4 - Modalités<sup>*</sup> </h2>
+    <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{fiches.infobullesModalites}}" tooltip-placement="left" tooltip-trigger="outsideClick" style="margin-top:-30px" ng-if="fiches.infobullesModalites"></i>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Tarifs*</h3>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" ng-model="fiches.data.modality.priceType" value="gratuit"> Gratuit
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" ng-model="fiches.data.modality.priceType" value="payant"> Payant
+                    </label>
+                    <label class="radio-inline" ng-if="fiches.data.type.id != 2">
+                        <input type="radio" ng-model="fiches.data.modality.priceType" value="conso"> Entrée gratuite, conso obligatoire
+                    </label>
+                </div>
+                <div class="form-group" ng-show="fiches.data.modality.priceType">
+                    <textarea rows="6" class="form-control" placeholder="Détail des tarifs" ng-model="fiches.data.modality.priceDetail" maxlength="200"></textarea>
+                    <em>{{200-fiches.data.modality.priceDetail.length}} caractères restants</em>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>Accès* </h3>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" ng-model="fiches.data.modality.accessType" value="libre" ng-click="fiches.setAccessLibre()" > Libre
+                    </label>
+                    <label class="radio-inline" ng-if="fiches.data.type.id == 2">
+                        <input type="radio"  ng-model="fiches.data.modality.accessType" value="inscription"> Sur inscription
+                    </label>
+                    <label class="radio-inline" ng-click="fiches.data.activity.inscriptions=[{}]" ng-if="fiches.data.type.id == 2">
+                        <input type="radio" ng-model="fiches.data.modality.accessType" value="adhesion"> Sur adhésion
+                    </label>
+                    <label class="radio-inline" ng-if="fiches.data.type.id == 1">
+                        <input type="radio" ng-model="fiches.data.modality.accessType" value="reservation"> Sur réservation
+                    </label>
+                    <label class="radio-inline" ng-if="fiches.data.type.id == 1">
+                        <input type="radio" ng-model="fiches.data.modality.accessType" value="conseillee"> Réservation conseillée
+                    </label>
+                </div>
+                <div ng-show="fiches.data.type.id == 2 && fiches.data.modality.accessType=='inscription'">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label>Inscriptions du </label>
+                        </div>
+                        <div class="form-inline" ng-repeat="inscription in fiches.data.activity.inscriptions">
+                            <div class="form-group activites-date has-feedback" >
+                              <input type="text" class="form-control date-input"
+                                     ph="jj/mm/aaaa"
+                                     ng-model="inscription.dateStart"
+                                     ng-focus="inscriptionFrom = true"
+                                     ng-click="inscriptionFrom = true"
+                                     uib-datepicker-popup="dd/MM/yyyy"
+                                     datepicker-options="fiches.datepickerOptions"
+                                     is-open="inscriptionFrom"
+                                     show-button-bar="false"
+                                     close-text="Fermer" >
+                              <span class="form-control-feedback glyphicon glyphicon-calendar"
+                                    aria-hidden="true">
+                              </span>
+                            </div>
+                            <div class="form-group activites-date has-feedback">
+                              <label> au </label>
+                              <input type="text" class="form-control date-input"
+                                     ph="jj/mm/aaaa"
+                                     ng-model="inscription.dateEnd"
+                                     ng-focus="inscriptionTo = true"
+                                     ng-click="inscriptionTo = true"
+                                     uib-datepicker-popup="dd/MM/yyyy"
+                                     datepicker-options="fiches.datepickerOptions"
+                                     is-open="inscriptionTo"
+                                     show-button-bar="false"
+                                     close-text="Fermer" >
+                              <span class="form-control-feedback glyphicon glyphicon-calendar"
+                                    aria-hidden="true">
+                              </span>
+                            </div>
+                            <div class="form-group">
+                            <div class="" ng-show="!$last" ng-click="fiches.deleteActivitesInscription(inscription)"> <i  class="fa fa-times" aria-hidden="true" ></i></div>
+                            <button type="button" class="btn" ng-show="$last" ng-click="fiches.addActivitesInscription()">+</button></div>
+                            <br/><br/>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="fiches.data.modality.accessType!='libre'">
+                  <div class="row">
+                      <div class="col-sm-3">Lien</div>
+                      <div class="col-sm-9">
+                          <input type="url" size="40" class="form-control" ph="http://" ng-model="fiches.data.modality.accessLink"/><br/>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-3">Tél</div>
+                      <div class="col-sm-9">
+                          <input type="tel" size="20" class="form-control" ng-model="fiches.data.modality.accessPhone" ng-blur="fiches.data.modality.accessPhone=fiches.formatTel(fiches.data.modality.accessPhone)" ng-paste="fiches.data.modality.accessPhone=fiches.formatTel(fiches.data.modality.accessPhone)"/><br/>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-3">Courriel</div>
+                      <div class="col-sm-9">
+                          <input type="mail" size="20" class="form-control" ng-model="fiches.data.modality.accessMail"/><br/>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

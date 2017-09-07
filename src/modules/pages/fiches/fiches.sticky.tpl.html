@@ -1,0 +1,25 @@
+<!-- PUBLISH -->
+<div class="controls-group sticky-menu fixed">
+  <button ng-if="fiches.currentUser.user.role > 1 || (fiches.currentUser.user.role == 1 && fiches.data.status.id==3)" class="btn btn-sm btn-icon" ng-click="fiches.save(fiches.data)"
+          ng-class="fiches.events.saved ? 'btn-success' : 'btn-primary'">
+    <i class="fa fa-floppy-o"></i> Enregistrer
+    <i class="fa" ng-class="{'fa-spinner fa-pulse': fiches.events.saving, 'fa-check': fiches.events.saved}"></i>
+  </button>
+  <button ng-if="fiches.currentUser.user.role == 1 && fiches.data.status.id!=3" class="btn btn-sm btn-icon" ng-click="fiches.changeStatut(2)"
+          ng-class="fiches.events.saved ? 'btn-success' : 'btn-primary'">
+    <i class="fa fa-floppy-o"></i> Enregistrer
+    <i class="fa" ng-class="{'fa-spinner fa-pulse': fiches.events.saving, 'fa-check': fiches.events.saved}"></i>
+  </button>
+  <button class="btn btn-sm btn-icon" disabled="disabled" ng-click="fiches.preview()" >
+    <i class="fa fa-eye"></i> Prévisualiser
+  </button>
+  <button class="btn btn-sm btn-icon" disabled="disabled" ng-click="fiches.preview()" >
+    <i class="fa fa-clock-o"></i> Historique
+  </button>
+  <a href="{{fiches.ecrireA.mailto}}" uib-tooltip="{{fiches.ecrireA.mailto}}" tooltip-placement="bottom" tooltip-trigger="mouseenter" class="btn btn-sm btn-icon" ng-if="fiches.currentUser.user.role > 1" >
+    <i class="fa fa-send-o"></i> {{fiches.ecrireA.label}}
+  </a>
+  <button class="btn btn-sm btn-icon" disabled="disabled" ng-click="fiches.preview()"  >
+    <i class="fa fa-link-o"></i> Lien raccourci
+  </button>
+</div>

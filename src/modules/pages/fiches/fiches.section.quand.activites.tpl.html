@@ -1,0 +1,183 @@
+<section class="section-pages" id="pages-section-quand">
+    <h2>3 - Quand ?<sup>*</sup></h2> 
+    <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{fiches.infobullesQuand}}" tooltip-placement="left" tooltip-trigger="outsideClick" style="margin-top:-30px;" ng-if="fiches.infobullesQuand"></i>
+<!-- ACTIVITES -->
+    <div class="wrapper-activites" ng-if="fiches.data.type.id == 2">
+        <div class="form-inline">
+            <div class="form-group activites-date has-feedback">
+              <label>Du</label>
+              <input type="text" class="form-control date-input"
+                     ph="jj/mm/aaaa"
+                     ng-model="fiches.data.activity.dateStart"
+                     ng-focus="fiches.datepickerFrom = true"
+                     ng-click="fiches.datepickerFrom = true"
+                     uib-datepicker-popup="dd/MM/yyyy"
+                     datepicker-options="fiches.datepickerOptions"
+                     is-open="fiches.datepickerFrom"
+                     show-button-bar="false"
+                     close-text="Fermer" 
+                     uib-tooltip="{{fiches.infobullesQuand}}" 
+                     tooltip-placement="bottom-right" 
+                     tooltip-trigger="focus">
+              <span class="form-control-feedback glyphicon glyphicon-calendar"
+                    aria-hidden="true">
+              </span>
+            </div> 
+
+            <div class="form-group activites-date has-feedback">
+              <label>au</label>
+              <input type="text" class="form-control date-input"
+                     ph="jj/mm/aaaa"
+                     ng-model="fiches.data.activity.dateEnd"
+                     ng-focus="fiches.datepickerTo = true"
+                     ng-click="fiches.datepickerTo = true"
+                     uib-datepicker-popup="dd/MM/yyyy"
+                     datepicker-options="fiches.datepickerOptions"
+                     is-open="fiches.datepickerTo"
+                     show-button-bar="false"
+                     close-text="Fermer" >
+              <span class="form-control-feedback glyphicon glyphicon-calendar"
+                    aria-hidden="true">
+              </span> 
+            </div>
+             
+            <div class="form-group checkbox activites-exception" >
+                <label class="control-label"><input type="checkbox" ng-true-value="1" ng-false-value="0" id="" ng-model="fiches.data.activity.holidays"  class=" "/> Sauf pendant les vacances scolaires</label>
+            </div>
+            <div class="form-group checkbox  activites-exception" >
+                <label class="control-label"><input type="checkbox" ng-true-value="1" ng-false-value="0"  id="" ng-model="fiches.data.activity.daysoff"   class=" "/> Sauf pendant les jours fériés</label>
+            </div>
+            <div class="form-group checkbox  activites-exception" >
+                <label class="control-label"><input type="checkbox" ng-true-value="1" ng-false-value="0"   id="" ng-model="fiches.data.activity.displayother" class=" "/> Autres exceptions</label>
+            </div>
+        </div>
+        <div class="activites-autres-exceptions" ng-if="fiches.data.activity.displayother">
+            <textarea uib-tooltip="Indiquez ici les autres exceptions" ph="Autres exceptions" class="form-control" rows="3" ng-model="fiches.data.activity.other"></textarea>
+        </div>
+        
+
+        <div class="wrapper-seances-ok">
+            <div ng-repeat="seance in fiches.data.activity.seances track by $index" class="seance-ok" ng-if="!seance.editable">
+                <div class="form-group seance-delete"  ng-click="fiches.deleteSeance(seance)">
+                    <i  class="fa fa-times" aria-hidden="true" ></i>
+                </div>
+                <div>
+                    <span ng-repeat="(day,i) in seance.day">{{day}} </span>
+                </div>
+                <div>
+                    {{seance.hourStart | date:'shortTime'}} à {{seance.hourEnd | date:'shortTime'}} 
+                </div>
+                <div>
+                    <span ng-if="seance.adults==1">Adultes</span><span ng-if="seance.teens==1"> Ados</span><span ng-if="seance.children==1"> Enfants </span>
+                </div>
+                <div ng-if="seance.ageFrom">
+                    <span>de {{seance.ageFrom}} </span>  <span> à {{seance.ageTo}} ans</span>
+                </div>
+                <div ng-if="seance.pmr == 1 || seance.blind==1 || seance.deaf ==1">
+                    <i class="fa fa-wheelchair" aria-hidden="true" ng-if="seance.pmr==1"></i> 
+                    <i class="fa fa-eye-slash" aria-hidden="true" ng-if="seance.blind==1"></i>
+                    <i class="fa fa-microphone-slash" aria-hidden="true" ng-if="seance.deaf==1"></i>
+                </div> 
+            </div> 
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="wrapper-seances" ng-repeat="seance in fiches.data.activity.seances track by $index" ng-if="seance.editable" >
+            <div class="form-inline seances-days" >
+                <div class="form-group checkbox seance-day">
+                    <label class="control-label"> 
+                        <input type="checkbox" ng-model="seance.day.lundi" ng-true-value="1" ng-false-value="" /> Lundi
+                    </label>
+                </div>
+                <div class="form-group checkbox seance-day" >
+                    <label class="control-label">
+                        <input type="checkbox"  ng-model="seance.day.mardi" ng-true-value="2" ng-false-value=""/> Mardi
+                    </label>
+                </div>
+                <div class="form-group checkbox seance-day" >
+                    <label class="control-label">
+                        <input type="checkbox"   ng-model="seance.day.mercredi" ng-true-value="3" ng-false-value=""/> Mercredi
+                    </label>
+                </div>
+                <div class="form-group checkbox seance-day" >
+                    <label class="control-label">
+                        <input type="checkbox"  ng-model="seance.day.jeudi" ng-true-value="4" ng-false-value=""/> Jeudi
+                    </label>
+                </div>
+                <div class="form-group checkbox seance-day" >
+                    <label class="control-label">
+                        <input type="checkbox" ng-model="seance.day.vendredi" ng-true-value="5" ng-false-value=""/> Vendredi
+                    </label>
+                </div>
+                <div class="form-group checkbox seance-day" >
+                    <label class="control-label">
+                        <input type="checkbox" ng-model="seance.day.samedi" ng-true-value="6" ng-false-value=""/> Samedi
+                    </label>
+                </div> 
+                <div class="form-group checkbox seance-day" >
+                    <label class="control-label">
+                        <input type="checkbox" ng-model="seance.day.dimanche" ng-true-value="0" ng-false-value=""/> Dimanche
+                    </label>
+                </div> 
+            </div>
+
+            <div class="row"  >
+                <div class="col-md-3">
+                   <div class="form-inline">
+                        <label class="col-sm-2 control-label">De </label>
+                        <div class="col-sm-10">
+                            <uib-timepicker ng-model="seance.hourStart" hour-step="fiches.timepickerOptions.hstep" minute-step="fiches.timepickerOptions.mstep" show-meridian="false" show-spinners="false" class=""></uib-timepicker>
+                        </div> 
+                    </div><br/><br/><br/>
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">à </label>
+                        <div class="col-sm-10">
+                            <uib-timepicker ng-model="seance.hourEnd"  hour-step="fiches.timepickerOptions.hstep" minute-step="fiches.timepickerOptions.mstep" show-meridian="false" show-spinners="false" class=""></uib-timepicker>
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-inline">
+                        <div class="checkbox">
+                            <b class="required">Public concerné *</b><br/>
+                            <div class="checkbox">
+                                <label class="control-label">
+                                    <input type="checkbox" ng-true-value="1" ng-click="fiches.setAge(seance,'adults')" ng-false-value="0" ng-model="seance.adults"  > Adultes 
+                                </label>
+                                <br/>
+                                <label class="control-label">
+                                    <input type="checkbox" ng-click="fiches.setAge(seance,'ados')" ng-true-value="1" ng-false-value="0" ng-model="seance.teens"  > Ados
+                                </label>
+                                <br/>
+                                <label class="control-label">
+                                    <input type="checkbox" ng-click="fiches.setAge(seance,'enfants')" ng-model="seance.children" ng-true-value="1" ng-false-value="0"> Enfants
+                                </label><br/>
+                                <input uib-tooltip="ex : de 18 à 65 ans" class="form-control seance-from" type="number" size="5" ng-model="seance.ageFrom" ph="de"  > 
+                                <input  uib-tooltip="ex : de 18 à 65 ans" class="form-control seance-to" type="number" size="5" ng-model="seance.ageTo" ph="à"  > 
+                            </div>
+                        </div>
+
+                        <div class="checkbox">
+                            <b class="required control-label">Accessibilité *</b><br/>
+                            <div class="checkbox">
+                                <label class="control-label">
+                                    <input type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="seance.pmr" /> <i class="fa fa-wheelchair" aria-hidden="true"></i>
+                                </label>
+                                <label class="control-label">
+                                    <input type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="seance.blind" /> <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                </label>
+                                <label class="control-label">
+                                    <input type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="seance.deaf" /> <i class="fa fa-microphone-slash" aria-hidden="true"></i>
+                                </label><br/><br/><br/><br/><br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <button type="button" class="btn" ng-click="fiches.validSeance(seance)">Valider</button>
+                </div>
+            </div> 
+        </div>
+        <button type="button" class="btn" ng-click="fiches.addSeance()"  >Ajouter une séance</button>
+    </div>
+</section>

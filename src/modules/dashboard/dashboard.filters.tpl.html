@@ -1,0 +1,129 @@
+<div class="dashboard-filters-search">
+  <div class="form-group has-feedback">
+    <input type="text" class="form-control"
+           ph="Rechercher un lieu, un évènement, un contributeur"
+           ng-model="dashboard.filters.text">
+    <span class="form-control-feedback glyphicon glyphicon-search" aria-hidden="true"></span>
+  </div>
+  <button class="btn btn-default" ng-model="dashboard.filters.my" uib-btn-checkbox
+          ng-if="dashboard.currentUser.hasAccess(dashboard.USER_ACCESS.moderator)">
+     <i class="fa" ng-class="{'fa-square-o': !dashboard.filters.my, 'fa-check-square-o': dashboard.filters.my}"></i> mes documents
+  </button>
+</div>
+
+<div ng-if="dashboard.currentUser.hasAccess(dashboard.USER_ACCESS.moderator)">
+
+  <button type="button" class="btn btn-info"
+          ng-click="dashboard.filtersCollapsed = !dashboard.filtersCollapsed">
+    Plus de filtres
+  </button>
+
+  <div class="dashboard-filters-more" uib-collapse="dashboard.filtersCollapsed">
+    <hr>
+    <div class="form-inline">
+      <div class="form-group">
+        <select class="form-control"
+                ng-model="dashboard.filters.type"
+                ng-options="type.id as type.title for type in dashboard.pagesTypes">
+          <option value="">Types de page</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control"
+                ng-model="dashboard.filters.status"
+                ng-options="status.id as status.title for status in dashboard.pagesStatus">
+          <option value="">Statuts</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control"
+                ng-model="dashboard.filters.group"
+                ng-options="group.id as group.title for group in dashboard.groups"
+                ng-disabled="dashboard.currentUser.isModerator()">
+          <option value="">Groupes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <div class="form-group has-feedback">
+          <label>Date de création</label>
+          <input type="text" class="form-control date-input"
+                 ph="jj/mm/aaaa"
+
+                 ng-model="dashboard.filters.dateFrom"
+                 ng-focus="dashboard.datepickerFrom = true"
+                 ng-click="dashboard.datepickerFrom = true"
+                 uib-datepicker-popup="dd/MM/yyyy"
+                 datepicker-options="dashboard.datepickerOptions"
+                 is-open="dashboard.datepickerFrom"
+                 show-button-bar="false"
+                 close-text="Fermer">
+          <span class="form-control-feedback glyphicon glyphicon-calendar"
+                aria-hidden="true">
+          </span>
+        </div>
+
+        <div class="form-group has-feedback">
+          <label>au</label>
+          <input type="text" class="form-control date-input"
+                 ph="jj/mm/aaaa"
+
+                 ng-model="dashboard.filters.dateTo"
+                 ng-focus="dashboard.datepickerTo = true"
+                 ng-click="dashboard.datepickerTo = true"
+                 uib-datepicker-popup="dd/MM/yyyy"
+                 datepicker-options="dashboard.datepickerOptions"
+                 is-open="dashboard.datepickerTo"
+                 show-button-bar="false"
+                 close-text="Fermer">
+          <span class="form-control-feedback glyphicon glyphicon-calendar"
+                aria-hidden="true">
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-inline"
+         ng-if="dashboard.currentUser.hasAccess(dashboard.USER_ACCESS.moderator) && (dashboard.filters.group === 11)">
+      <div class="form-group">
+        <label>En vue</label>
+        <select class="form-control" ng-model="dashboard.filters.envueMonth">
+          <option value="">Date de parution</option>
+          <option value="Janvier-février">Janvier-février</option>
+          <option value="Mars-avril">Mars-avril</option>
+          <option value="Mai-juin-été">Mai-juin-été</option>
+          <option value="Septembre-octobre">Septembre-octobre</option>
+          <option value="Novembre-décembre">Novembre-décembre</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control" ng-model="dashboard.filters.envueTheme">
+          <option value="">Thème</option>
+          <option value="ADULTE / A la Une">ADULTE / A la Une</option>
+          <option value="ADULTE / Les grands Rendez-vous">ADULTE / Les grands Rendez-vous</option>
+          <option value="ADULTE / Dans votre quartier">ADULTE / Dans votre quartier</option>
+          <option value="JEUNESSE / Les petits rendez-vous">JEUNESSE / Les petits rendez-vous</option>
+          <option value="JEUNESSE / Dans votre quartier">JEUNESSE / Dans votre quartier</option>
+        </select>
+      </div>
+
+      <div class="form-group" ng-if="dashboard.filters.envueMonth || dashboard.filters.envueTheme">
+        <button class="btn btn-default" ng-click="dashboard.exportEnvue()">
+          Exporter
+        </button>
+      </div>
+
+    </div>
+
+    <uib-rating ng-if="dashboard.currentUser.hasAccess(dashboard.USER_ACCESS.redactor)" 
+                ng-model="dashboard.filters.weight"
+                max="dashboard.maxWeight"
+                readonly="false"
+                on-hover="hoveringOver(value)"
+                on-leave="overStar = null"
+                titles="['1','2','3']"
+                state-on="'glyphicon-star active'"
+                state-off="'glyphicon-star'">
+    </uib-rating>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="article-wrapper" ng-class="{ 'sticky-controls': article.stickyControls }">
+  <aside class="article-controls"
+         ng-controller="ArticleControlsController as articleControls"
+         ng-include="'pages/article.controls.html'"></aside>
+  <div class="article-editor">
+    <section class="row pages-what" ng-include="'pages/page.what.html'"></section>
+    <section class="pages-components" ng-include="'pages/article.editor.html'"></section>
+  </div>
+</div>

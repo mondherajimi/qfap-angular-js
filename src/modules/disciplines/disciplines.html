@@ -1,0 +1,60 @@
+<div class="page-header">
+  <h1>Gestion des disciplines</h1>
+  <button type="button" class="btn btn-primary pull-right" ng-click="disciplines.addRow()"
+          uib-tooltip="Ajouter une discipline">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+</div>
+
+<table class="table table-condensed table-striped"
+       template-header="ng-table/addRowHeader.html"
+       show-filter="!disciplines.tableParams.parameters().addRow"
+       ng-table-dynamic="disciplines.tableParams with disciplines.tableColumns">
+  <tr ng-repeat="row in $data" ng-form="rowForm">
+    <td ng-repeat="col in $columns">
+
+      <div ng-if="!row.eRow" ng-switch="col.dataType">
+        <span ng-switch-default>
+          {{row[col.field]}}
+        </span>
+        <div ng-switch-when="command" class="cell-command">
+          <button class="btn btn-xs btn-link"
+                  ng-click="disciplines.editRow(row)"
+                  uib-tooltip="Modifier">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button class="btn btn-xs btn-link"
+                  ng-click="disciplines.deleteRow(row)"
+                  uib-tooltip="Supprimer">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div ng-if="row.eRow" ng-switch="col.dataType">
+        <div class="form-group" ng-switch-default show-errors>
+          <label for="{{col.field}}" class="sr-only">{{col.title}}</label>
+          <input type="text" name="{{col.field}}" id="{{col.field}}"
+                 class="form-control input-sm"
+                 ng-model="row.eRow[col.field]" ng-required="col.required" />
+        </div>
+        <span ng-switch-when="readonly">
+          {{row[col.field]}}
+        </span>
+        <div ng-switch-when="command" class="cell-command">
+          <button class="btn btn-xs btn-link"
+                  ng-disabled="rowForm.$invalid"
+                  ng-click="disciplines.saveRow(row, rowForm)"
+                  uib-tooltip="Enregistrer">
+            <i class="fa fa-floppy-o"></i>
+          </button>
+          <button class="btn btn-xs btn-link"
+                  ng-click="disciplines.cancelEditRow(row)"
+                  uib-tooltip="Annuler">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>

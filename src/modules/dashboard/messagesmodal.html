@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <button ng-click="$dismiss()" type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h3 class="modal-title">Messages des bureaux</h4>
+</div>
+
+<div class="modal-body">
+
+  <span ng-repeat="message in messagesmodal.messages">
+        <h5 style="margin-top: 5px; margin-bottom: 5px;">{{ message.date | date:'shortDate'}}</h5>
+        <h3 style="margin-top: 5px; margin-bottom: 5px; color: #f94f4f;">{{ message.title }}</h3>
+        <div ng-bind-html="message.text | linky:'_blank'"></div>
+        <hr style="margin-top: 10px; margin-bottom: 10px;">
+  </span>
+
+</div>
+
+<div class="modal-footer"></div>
+
+

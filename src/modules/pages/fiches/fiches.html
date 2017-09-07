@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-1">
+    <div class="aside-wrapper" ng-if="fiches.data.id && fiches.data.user" ng-include="'fiches.controls.html'"></div>
+  </div>
+  <div class="wrapper-fiches col-md-11">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 ng-if="!fiches.data.id">Création fiche {{fiches.data.type.title}}</h1>
+            <h1 ng-if="fiches.data.id">Modification fiche {{fiches.data.type.title}}</h1>
+            <div ng-if="fiches.data.id" ng-include="fiches.stickyTpl"></div>
+            <em>{{fiches.data.status.title}}</em>
+        </div>
+    </div>
+    <form novalidate name="formfiches">
+        <div ng-include="fiches.sectionQuoiTpl"></div>
+        <div class="row divider"></div>
+        <div ng-if="fiches.data.id && fiches.data.user">
+            <div ng-include="fiches.sectionOuTpl" ng-if="fiches.data.type.id<3"></div>
+            <div class="row divider"></div>
+            <div ng-include="fiches.sectionQuandActivitesTpl" ng-if="fiches.data.type.id==2"></div>
+            <div ng-include="fiches.sectionQuandEvenementsTpl" ng-if="fiches.data.type.id==1"></div>
+            <div ng-include="fiches.sectionQuandProgrammesTpl" ng-if="fiches.data.type.id==3"></div>
+            <div class="row divider"></div>
+            <div ng-include="fiches.sectionModalitesTpl" ng-if="fiches.data.type.id<3"></div>
+            <div class="row divider"></div>
+            <div ng-include="fiches.sectionContactTpl"  ng-if="fiches.data.type.id!=3"></div>
+            <div class="row divider"></div>
+            <div ng-include="fiches.sectionFinaliserTpl"></div>
+        </div>
+    </form>
+  </div>
+</div>

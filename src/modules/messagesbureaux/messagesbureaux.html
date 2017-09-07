@@ -1,0 +1,90 @@
+<div class="page-header">
+  <h1>Gestion des messages des bureaux</h1>
+  <button type="button" class="btn btn-primary pull-right" ng-click="messagesbureaux.addRow()"
+          uib-tooltip="Ajouter un message des bureaux">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+</div>
+
+<table class="table table-condensed table-striped"
+       template-header="ng-table/addRowHeader.html"
+       ng-table-dynamic="messagesbureaux.tableParams with messagesbureaux.tableColumns">
+  <tr ng-repeat="row in $data" ng-form="rowForm">
+    <td ng-repeat="col in $columns">
+
+      <div ng-if="!row.eRow" ng-switch="col.dataType">
+        <span ng-switch-default>
+          <span ng-if="col.field == 'date'">
+            {{row[col.field] | date:'shortDate'}}
+          </span>
+          <span ng-if="col.field !== 'date'">
+            {{row[col.field]}}
+          </span>
+        </span>
+        <span ng-switch-when="select">
+          {{row[col.field] | staticData:col.selectData}}
+        </span>
+        <span ng-switch-when="checkbox">
+          {{row[col.field] | boolChoice:1:'En ligne':'Hors ligne'}}
+        </span>
+        <div ng-switch-when="command" class="cell-command">
+          <button class="btn btn-xs btn-link"
+                  ng-click="messagesbureaux.editRow(row)"
+                  uib-tooltip="Modifier">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button class="btn btn-xs btn-link"
+                  ng-click="messagesbureaux.deleteRow(row)"
+                  uib-tooltip="Supprimer">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div ng-if="row.eRow" ng-switch="col.dataType">
+        <div class="form-group" ng-switch-default show-errors>
+          <label for="{{col.field}}" class="sr-only">{{col.title}}</label>
+          <input type="text" name="{{col.field}}" id="{{col.field}}"
+                 class="form-control input-sm"
+                 ng-model="row.eRow[col.field]" ng-required="col.required"/>
+        </div>
+        <span ng-switch-when="readonly">
+          <span ng-if="col.field == 'date'">
+            {{row[col.field] | date:'shortDate'}}
+          </span>
+          <span ng-if="col.field !== 'date'">
+            {{row[col.field]}}
+          </span>
+        </span>
+        <select class="form-control input-sm" name="{{col.field}}"
+                ng-switch-when="select"
+                ng-model="row.eRow[col.field]"
+                select-number>
+          <option value="?"></option>
+          <option ng-repeat="selectData in col.selectData"
+                  value="{{selectData.id}}">
+            {{selectData.title}}
+          </option>
+        </select>
+
+        <input type="checkbox" class="form-control" name="{{col.field}}" ng-switch-when="checkbox"
+               ng-model="row.eRow[col.field]" ng-true-value="1" ng-false-value="0" value="1">
+
+
+        <div ng-switch-when="command" class="cell-command">
+          <button class="btn btn-xs btn-link"
+                  ng-disabled="rowForm.$invalid"
+                  ng-click="messagesbureaux.saveRow(row, rowForm)"
+                  uib-tooltip="Enregistrer">
+            <i class="fa fa-floppy-o"></i>
+          </button>
+          <button class="btn btn-xs btn-link"
+                  ng-click="messagesbureaux.cancelEditRow(row)"
+                  uib-tooltip="Annuler">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>

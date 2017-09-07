@@ -1,0 +1,251 @@
+<section class="section-pages" id="pages-section-quand">
+    <h2>3 - Quand ?<sup>*</sup></h2>
+<!-- EVENEMENTS -->
+    <div class="wrapper-evenements" ng-if="fiches.data.type.id == 1">
+        <div ng-repeat="periode in fiches.data.event.periodes track by $index" class="wrapper-periode wrapper-periode-{{periode.id}}">
+            <h3 class="page-title">Période {{$index+1}}
+            <i class="fa fa-times pull-right" ng-click="fiches.deletePeriode(periode)"></i>
+            <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{fiches.infobullesQuand}}" tooltip-placement="left" tooltip-trigger="outsideClick" ng-show="$index==0 && fiches.infobullesQuand" ></i>
+            </h3>
+            <div class="row form-inline">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="radio">
+                            <label class="radio-inline">
+                                <input type="radio" class="date_unique" ng-model="periode.isDateMultiples" ng-value="1" ng-click="fiches.periodeMode(periode,'unique')"> Date unique
+                            </label>
+                        </div>
+
+                        <div class="radio">
+                            <label class="radio-inline">
+                                <input type="radio" class="date_multiple" ng-model="periode.isDateMultiples" ng-value="2" ng-click="fiches.periodeMode(periode,'multiple')"> Plusieurs dates
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group evenements-date has-feedback">
+                      <label ng-if="periode.isDateMultiples==2">Du</label>
+                      <input type="text" class="form-control date-input"
+                             ph="jj/mm/aaaa"
+                             ng-model="periode.dateStart"
+                             ng-focus="periode.from = true"
+                             ng-click="periode.from = true"
+                             uib-datepicker-popup="dd/MM/yyyy"
+                             datepicker-options="fiches.datepickerOptions"
+                             is-open="periode.from"
+                             show-button-bar="false"
+                             close-text="Fermer" 
+                             ng-blur="fiches.setDay(periode)" 
+
+                             >
+                      <span class="form-control-feedback glyphicon glyphicon-calendar"
+                            aria-hidden="true">
+                      </span>
+                    </div> 
+                </div>
+
+                 <!-- PERIODE DATE MULTIPLE -->
+                <div >
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="time_periode1_from"> au </label>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="has-feedback form-group">
+                                <input type="text" class="form-control date-input"
+                                     ph="jj/mm/aaaa"
+                                     ng-model="periode.dateEnd"
+                                     ng-focus="periode.to = true"
+                                     ng-click="periode.to = true"
+                                     uib-datepicker-popup="dd/MM/yyyy"
+                                     datepicker-options="fiches.datepickerOptions"
+                                     is-open="periode.to"
+                                     show-button-bar="false"
+                                     close-text="Fermer" 
+                                     ng-disabled="periode.isDateMultiples==1"
+                                     >
+                                  <span class="form-control-feedback glyphicon glyphicon-calendar"
+                                        aria-hidden="true">
+                                  </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!-- <button type="button" class="btn btn-qufaire-primary-inversed js-btn-add-image" title="Ajouter une exception">Ajouter une exception </button> -->
+                    </div>
+
+                </div>
+
+                <div class="col-md-2">
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-qufaire-default" ng-click="fiches.duplicatePeriode(periode)">Dupliquer</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="" ng-if="periode.isDateMultiples==2 || periode.isDateMultiples==1">
+                <!-- <div class="wrapper-multiple-dates form-inline" ng-show="{{periode.isDateMultiples}}">
+                    <label ng-repeat="weekDay in weekDays" class="checkbox-inline weekDay">
+                        <input type="checkbox" name="weekDays[]" class="weekDays" value="{{weekday.id}}"> {{weekDay.name}}
+                    </label>
+                        </div> -->
+                <div class="wrapper-seances-ok">
+                    <div ng-repeat="seance in periode.seances track by $index" class="seance-ok" ng-if="!seance.editable">
+                        <div class="form-group seance-delete"  ng-click="fiches.deleteSeanceEvenement(seance,periode)">
+                            <i  class="fa fa-times" aria-hidden="true" ></i>
+                        </div>
+                        <div>
+                            <span ng-repeat="(day,i) in seance.day">{{day}} </span>
+                        </div>
+                        <div>
+                            {{seance.hourStart | date:'HH:mm'}} à {{seance.hourEnd | date:'HH:mm'}} 
+                        </div>
+                        <div>
+                            <span ng-if="seance.adults==1">Adultes</span><span ng-if="seance.teens==1"> Ados</span><span ng-if="seance.children==1"> Enfants </span>
+                        </div>
+                        <div ng-if="seance.ageFrom">
+                            <span>de {{seance.ageFrom}} </span>  <span> à {{seance.ageTo}} ans</span>
+                        </div>
+                        <div ng-if="seance.handicap == 1 || seance.blind==1 || seance.deaf ==1">
+                            <i class="fa fa-wheelchair" aria-hidden="true" ng-if="seance.handicap==1"></i> 
+                            <i class="fa fa-eye-slash" aria-hidden="true" ng-if="seance.blind==1"></i>
+                            <i class="fa fa-microphone-slash" aria-hidden="true" ng-if="seance.deaf==1"></i>
+                        </div>
+                    </div> 
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="wrapper-seances" ng-repeat="seance in periode.seances track by $index" ng-if="seance.editable">
+                    <div class="form-inline seances-days" ng-if="periode.isDateMultiples==2">
+                        <div class="form-group checkbox seance-day">
+                            <label class="control-label"> 
+                                <input type="checkbox" ng-model="seance.day.lundi" ng-true-value="1" ng-false-value="" /> Lundi
+                            </label>
+                        </div>
+                        <div class="form-group checkbox seance-day" >
+                            <label class="control-label">
+                                <input type="checkbox"  ng-model="seance.day.mardi" ng-true-value="2" ng-false-value=""/> Mardi
+                            </label>
+                        </div>
+                        <div class="form-group checkbox seance-day" >
+                            <label class="control-label">
+                                <input type="checkbox"   ng-model="seance.day.mercredi" ng-true-value="3" ng-false-value=""/> Mercredi
+                            </label>
+                        </div>
+                        <div class="form-group checkbox seance-day" >
+                            <label class="control-label">
+                                <input type="checkbox"  ng-model="seance.day.jeudi" ng-true-value="4" ng-false-value=""/> Jeudi
+                            </label>
+                        </div>
+                        <div class="form-group checkbox seance-day" >
+                            <label class="control-label">
+                                <input type="checkbox" ng-model="seance.day.vendredi" ng-true-value="5" ng-false-value=""/> Vendredi
+                            </label>
+                        </div>
+                        <div class="form-group checkbox seance-day" >
+                            <label class="control-label">
+                                <input type="checkbox" ng-model="seance.day.samedi" ng-true-value="6" ng-false-value=""/> Samedi
+                            </label>
+                        </div> 
+                        <div class="form-group checkbox seance-day" >
+                            <label class="control-label">
+                                <input type="checkbox" ng-model="seance.day.dimanche" ng-true-value="0" ng-false-value=""/> Dimanche
+                            </label>
+                        </div> 
+                        <div class="form-group seance-delete">
+                            <i uib-tooltip="Supprimer cette séance" tooltip-trigger="outsideClick" class="fa fa-times" aria-hidden="true" ng-click="fiches.deleteSeanceEvenement(seance,periode)"></i>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                           <div class="form-inline">
+                                <label class="col-sm-2 control-label">De </label>
+                                <div class="col-sm-10">
+                                    <uib-timepicker ng-model="seance.hourStart" hour-step="fiches.timepickerOptions.hstep" minute-step="fiches.timepickerOptions.mstep" show-meridian="false" show-spinners="false" class=""></uib-timepicker>
+                                </div> 
+                            </div><br/><br/><br/>
+                            <div class="form-inline">
+                                <label class="col-sm-2 control-label">à </label>
+                                <div class="col-sm-10">
+                                    <uib-timepicker ng-model="seance.hourEnd"  hour-step="fiches.timepickerOptions.hstep" minute-step="fiches.timepickerOptions.mstep" show-meridian="false" show-spinners="false" class=""></uib-timepicker>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <button ng-if="periode.isDateMultiples==2" type="button" class="btn" ng-click="fiches.validSeanceEvenement(seance)">Valider</button>
+                        </div>
+                    </div> 
+                </div>
+                <button ng-if="periode.isDateMultiples==2" type="button" class="btn btn-xs" ng-click="fiches.addSeanceEvenement(periode)">Ajouter une séance</button>
+            </div>
+        </div><!-- /PERIODE -->
+        <div class="row" >
+            <div class="col-md-12">
+                <hr/>
+                <button type="button" class="btn" ng-click="fiches.addPeriode()">Ajouter une période</button> 
+                <button type="button" class="btn" ng-click="fiches.openException()">Ajouter une fermeture</button>
+
+            </div>
+        </div>
+        <!-- EXCEPTIONS -->
+        <div class="row" ng-show="fiches.data.event.showExceptions==1">
+            <div class="col-md-12">
+                <div class="periode-exception">
+                    <label>Exceptions: </label>
+                    <div class="form-inline" ng-repeat="exception in fiches.data.event.exceptions">
+                        <div class="form-group">
+                             Fermeture du
+                        </div>
+                        
+                        <div class="form-group">
+                            
+                            <div class="has-feedback form-group">
+                                <input type="text" class="form-control date-input"
+                                     ph="jj/mm/aaaa"
+                                     ng-model="exception.dateStart"
+                                     ng-focus="exception.dateStartopen = true"
+                                     ng-click="exception.dateStartopen = true"
+                                     uib-datepicker-popup="dd/MM/yyyy"
+                                     datepicker-options="fiches.datepickerOptions"
+                                     is-open="exception.dateStartopen"
+                                     show-button-bar="false"
+                                     close-text="Fermer" >
+                                  <span class="form-control-feedback glyphicon glyphicon-calendar"
+                                        aria-hidden="true">
+                                  </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            au
+                            <div class="has-feedback form-group">
+                                <input type="text" class="form-control date-input"
+                                     ph="jj/mm/aaaa"
+                                     ng-model="exception.dateEnd"
+                                     ng-focus="exception.dateEndopen = true"
+                                     ng-click="exception.dateEndopen = true"
+                                     uib-datepicker-popup="dd/MM/yyyy"
+                                     datepicker-options="fiches.datepickerOptions"
+                                     is-open="exception.dateEndopen"
+                                     show-button-bar="false"
+                                     close-text="Fermer" >
+                                  <span class="form-control-feedback glyphicon glyphicon-calendar"
+                                        aria-hidden="true">
+                                  </span>
+                            </div>
+                        </div>
+                        <i class="fa fa-times" ng-show="!$first" ng-click="fiches.deleteException(exception)"> </i> 
+                        <div ng-show="$last">
+                            <button type="button" class="btn" ng-click="fiches.addException()">Ajouter <i class="fa fa-plus" ></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /EXCEPTIONS -->
+    </div>
+</section>

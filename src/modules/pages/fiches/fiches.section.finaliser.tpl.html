@@ -1,0 +1,215 @@
+<section class="section-pages" id="pages-section-finaliser" >
+    <h2><span ng-if="fiches.data.type.id == 2 || fiches.data.type.id == 1">6</span><span ng-if="fiches.data.type.id == 3">3</span> - Finaliser<sup>*</sup></h2>
+        <!-- DISCIPLINES -->
+        <div class="container-fluid" ng-if="fiches.data.type.id == 2">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-1">Discipline</label>
+                        <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{fiches.infobullesDiscipline}}" tooltip-placement="left" tooltip-trigger="outsideClick" ng-if="fiches.infobullesDiscipline"></i>
+                        <div class="col-sm-4">
+                            <select class="form-control"
+                                    ng-model="fiches.data.activity.discipline"
+                                    ng-options="discipline.title for discipline in fiches.disciplines track by discipline.id">
+                            </select>
+                        </div>
+                        <div class="col-sm-7"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /DISCIPLINES -->
+
+        <!-- /EVENEMENT NUIT BLANCHE -->
+        <div class="container-fluid" ng-if="fiches.data.type.id == 1 && (fiches.currentUser.user.group == 2 || fiches.currentUser.user.role>2)">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Type de projet </label> 
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="fiches.data.event.nuitblanche" ng-value="1" value="1">On 
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="fiches.data.event.nuitblanche" ng-value="2" value="2">Off 
+                        </label> 
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="fiches.data.event.nuitblanche" ng-value="3" value="3">Off (hors parcours)
+                        </label> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /EN VUE CONTRIB BIBLIOTHEQUES -->
+        <div class="container-fluid" ng-if="fiches.data.type.id == 1 && (fiches.currentUser.user.group == 11 && fiches.currentUser.user.role==2) || (fiches.currentUser.user.role==16)">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label>En vue</label>
+                            <select class="form-control" ng-model="fiches.data.modality.envueMonth">
+                              <option value="">Date de parution</option>
+                              <option value="Janvier-février">Janvier-février</option>
+                              <option value="Mars-avril">Mars-avril</option>
+                              <option value="Mai-juin-été">Mai-juin-été</option>
+                              <option value="Septembre-octobre">Septembre-octobre</option>
+                              <option value="Novembre-décembre">Novembre-décembre</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <select class="form-control" ng-model="fiches.data.modality.envueTheme">
+                              <option value="">Thème</option>
+                              <option value="ADULTE / A la Une">ADULTE / A la Une</option>
+                              <option value="ADULTE / Les grands Rendez-vous">ADULTE / Les grands Rendez-vous</option>
+                              <option value="ADULTE / Dans votre quartier">ADULTE / Dans votre quartier</option>
+                              <option value="JEUNESSE / Les petits rendez-vous">JEUNESSE / Les petits rendez-vous</option>
+                              <option value="JEUNESSE / Dans votre quartier">JEUNESSE / Dans votre quartier</option>
+                            </select>
+                          </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+
+        <!-- CATEGORIES -->
+        <div class="container-fluid" ng-if="fiches.data.type.id == 1 || fiches.data.type.id == 3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <h3>Choisir une catégorie * <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{fiches.infobullesFinaliser}}" tooltip-placement="left" ng-if="fiches.infobullesFinaliser" ></i></h3>
+                    </div>
+                    <div class="pull-left categories-block" ng-repeat="categorie in fiches.categories | filter : {parent:0}">
+                       <h4>{{categorie.title}}</h4>
+                       <div ng-repeat="souscategorie in fiches.categories | filter : {parent:categorie.id}">
+                            <label>
+                                <input type="radio" ng-model="fiches.data.event.category" ng-value="souscategorie.id"> {{souscategorie.title}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /CATEGORIES  -->
+
+        <!-- TAGS -->
+        <div class="container-fluid wrapper-tags" ng-if="fiches.data.type.id == 1 || fiches.data.type.id == 3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <h3>Tags</h3>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-group" ng-repeat="tag in fiches.tags">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-checked="fiches.data.tags.indexOf(tag.id) > -1" ng-click="fiches.toggleTags(tag.id)"> {{tag.title}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /TAGS -->
+
+        <!-- ASSOCIER PROGRAMME -->
+        <div class="container-fluid wrapper-associer" ng-if="fiches.data.type.id == 1 || fiches.data.type.id == 3 && fiches.currentUser.user.role > 1">
+            <div class="row search-associe-fiche">
+                <div class="col-md-12">
+                    <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{fiches.infobullesAssocier}}" ng-if="fiches.infobullesAssocier" tooltip-placement="left" ></i>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label style="width: 271px;" ng-show="fiches.data.type.id == 3">Associer des fiches à mon programme </label>
+                            <label style="width: 271px;" ng-show="fiches.data.type.id == 1">Associer des programmes à ma fiche </label>
+                            <input class="form-control" type="text" class="form-control" ph="Rechercher une fiche par titre ou par id" ng-model="fiches.associe.q" ng-change="fiches.searchAssocieFiche()" size="50"/>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row results-search-fiche" ng-if="fiches.associe.results.length>0">
+                <div class="col-md-12">
+                    <table class="table-hover table-condensed">
+                        <tr ng-repeat="result in fiches.associe.results" ng-click="fiches.selectAssocieFiche(result)">
+                            <td>{{result.title}} {{result.objectID}}</td> 
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row" ng-if="fiches.data.pagesFriends.length>0">
+                <div class="col-md-12" sv-root sv-part="fiches.data.pagesFriends">
+                    <div class="row row-result-associe-fiche " ng-repeat="fiche in fiches.data.pagesFriends"  sv-element>
+                        <div class="col-md-1">
+                            <i class="fa fa-arrows-v home-list-handle" sv-handle></i> 
+                        </div>
+                        <div class="col-md-6">
+                            <div>
+                                <a href="/fiches/edit/{{fiche.id}}" target="_blank">{{fiche.title}} {{fiche.id}}</a> 
+                                <span ng-show="fiche.event.category.title">-  {{fiche.event.category.title}}</span>
+                            </div>
+                            <div ng-if="fiche.type!=3" ng-show="fiche.place.name!=''">
+                                {{fiche.place.name}} - {{fiche.place.zipCode}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-right" >
+                            <span ng-show="fiche.event.realDateStart!=''">Du {{fiche.event.realDateStart | date:'dd/MM/yyyy'}} au {{fiche.event.realDateEnd | date:'dd/MM/yyyy'}}</span>
+                        </div>
+                        <div class="col-md-1 text-right">
+                             <i class="fa fa-times" ng-click="fiches.deleteAssocieFiche(fiche)"></i>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ASSOCIER PROGRAMME -->
+
+</section>
+
+<section class="section-pages" id="pages-section-boutons">
+    <div class="container-fluid" >
+        <div class="divider-gray"></div>
+        <div class="row" ng-if="fiches.currentUser.user.role > 1">
+            <div class="col-md-6">
+                <button type="button" ng-disabled="formfiches.$invalid" class="btn btn-md btn-warning btn-quefaire-archiver" ng-click="fiches.changeStatut(5);" ng-if="(fiches.data.status.id!=5 && fiches.currentUser.user.role >=8) || fiches.events.archiving" >Archiver <i class="fa fa-right" ng-class="{'fa-spinner fa-pulse': fiches.events.archiving, 'fa-check': fiches.events.archived}"></i></button>
+                <button ng-click="fiches.changeStatut(2);" type="button" class="btn btn-md btn-warning btn-quefaire-attente" ng-disabled="formfiches.$invalid" ng-class="fiches.events.saved ? 'btn-warning' : 'btn-warning'" ng-if="fiches.data.status.id!=2 && fiches.currentUser.user.role >=8"> Mettre en attente
+                <i class="fa fa-right" ng-class="{'fa-spinner fa-pulse': fiches.events.reviewing, 'fa-check': fiches.events.reviewed}"></i></button>
+                <button ng-click="fiches.changeStatut(4);" type="button" class="btn btn-md btn-danger btn-quefaire-refuser" ng-class="fiches.events.saved ? 'btn-danger' : 'btn-danger'" ng-if="fiches.data.status.id!=4 && fiches.currentUser.user.role >=8">Refuser <i class="fa fa-right" ng-class="{'fa-spinner fa-pulse': fiches.events.rejecting, 'fa-check': fiches.events.rejected}"></i></button>
+            </div>
+            <div class="col-md-4 col-md-offset-2 text-right">
+                    <uib-rating ng-model="fiches.data.weight"
+                                max="3" readonly="false" titles="['1','2','3']"
+                                on-hover="hoveringOver(value)" on-leave="overStar = null"
+                                state-on="'glyphicon-star active'" state-off="'glyphicon-star'" ng-if="fiches.currentUser.user.role >= 8">
+                    </uib-rating>
+                    <button type="button" class="btn btn-md" ng-click="fiches.save(fiches.data)"
+                          ng-class="fiches.events.saved ? 'btn-success' : 'btn-primary'">
+                        <i class="fa fa-floppy-o"></i> Enregistrer
+                        <i class="fa fa-right" ng-class="{'fa-spinner fa-pulse': fiches.events.saving, 'fa-check': fiches.events.saved}"></i>
+                    </button>
+                    <button ng-click="fiches.dupliquer();" type="button" class="btn btn-md btn-quefaire-publier" ng-disabled="formfiches.$invalid" ng-class="fiches.events.saved ? 'btn-success' : 'btn-primary'" ng-if="(fiches.data.status.id==1 || fiches.data.status.id==5) && fiches.currentUser.user.role >= 8">Dupliquer</button>
+                    <button ng-click="fiches.changeStatut(1);" type="button" class="btn btn-md btn-quefaire-publier" ng-disabled="formfiches.$invalid" ng-class="fiches.events.saved ? 'btn-success' : 'btn-primary'" ng-if="fiches.data.status.id!=1">Publier</button>
+            </div>
+        </div> 
+        <div class="row" ng-if="fiches.currentUser.user.role == 1">
+            <div class="col-md-12">
+                <button ng-click="fiches.changeStatut(2);" ng-if="fiches.data.status.id==3 || fiches.data.status.id==1" type="button" class="btn btn-lg btn-quefaire-publier center-block" ng-disabled="formfiches.$invalid" ng-class="fiches.events.saved ? 'btn-success' : 'btn-primary'">
+                        Demander la publication
+                        <!-- <i class="fa fa-left" ng-class="{'fa-spinner fa-pulse': fiches.events.saving, 'fa-check': fiches.events.saved}"></i> -->
+                </button>
+                </button>
+                <button ng-click="fiches.save(fiches.data);" ng-if="fiches.data.status.id==2" type="button" class="btn btn-lg btn-quefaire-publier center-block" ng-disabled="formfiches.$invalid" ng-class="fiches.events.saved ? 'btn-success' : 'btn-primary'">
+                        Publication demandée
+                        <!-- <i class="fa fa-left" ng-class="{'fa-spinner fa-pulse': fiches.events.saving, 'fa-check': fiches.events.saved}"> --></i></button>
+                </button>
+            </div>
+        </div>
+        <div class="divider-gray"></div>
+        <div class="row" >
+            <div class="col-md-12">
+                <em class="pull-right">
+                    Ce document a pour statut {{fiches.data.status.title}}
+                </em>
+            </div>
+        </div>
+    </div>
+</section>

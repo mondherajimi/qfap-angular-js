@@ -1,0 +1,29 @@
+<div class="col-md-6">
+  <div class="form-group input-count">
+    <label for="title">Titre *</label>
+    <input type="text" class="form-control" name="title" maxlength="60"
+           ph="60 caractères max" ng-model="pages.data.title" required>
+    <span class="character-count" ng-class="{'text-danger': pages.data.title.length >= 60}">
+      {{60 - pages.data.title.length}}
+    </span>
+  </div>
+  <div class="form-group input-count">
+    <label for="lead-text">Chapeau *</label>
+    <textarea class="form-control" name="lead-text" rows="5"
+              ng-model="pages.data.leadText" ph="360 caractères max" required>
+    </textarea>
+    <span class="character-count" ng-class="{'text-danger': pages.data.leadText.length >= 360}">
+      {{360 - pages.data.leadText.length}}
+    </span>
+  </div>
+</div>
+<div class="col-md-6">
+  <div class="pages-main-image">
+    <img class="pages-main-image-img img-responsive" ng-src="{{ pages.data.mainImage.src }}"
+         ng-alt="{{ pages.data.mainImage.alt }}" ng-title="{{ pages.data.mainImage.title }}"
+         ng-if="pages.data.mainImage">
+    <button type="button" class="btn btn-primary pages-main-image-btn">
+      Ajouter une image
+    </button>
+  </div>
+</div>

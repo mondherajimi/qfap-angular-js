@@ -1,0 +1,7 @@
+<nav class="dashboard-actions"
+     ng-if="dashboard.currentUser.isUser() || dashboard.currentUser.isContributor() || dashboard.currentUser.isModerator()"
+     ng-include="dashboard.actionsTpl"></nav>
+
+<div class="dashboard-filters" ng-include="dashboard.filtersTpl"></div>
+
+<div class="dashboard-table" ng-include="dashboard.tableTpl"></div>

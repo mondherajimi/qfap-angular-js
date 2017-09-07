@@ -1,0 +1,45 @@
+<section class="section-pages" id="pages-section-quand">
+    <h2>2 - Quand ?<sup>*</sup></h2> 
+    <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{fiches.infobullesQuand}}"  tooltip-placement="left" tooltip-trigger="outsideClick" style="margin-top:-30px" ng-if="fiches.infobullesQuand"></i>
+<!-- ACTIVITES -->
+    <div class="wrapper-activites" ng-if="fiches.data.type.id == 3">
+        <div class="form-inline">
+            <div class="form-group activites-date has-feedback">
+              <label>Du</label>
+              <input type="text" class="form-control date-input"
+                     ph="jj/mm/aaaa"
+                     ng-model="fiches.data.event.realDateStart"
+                     ng-focus="fiches.datepickerFrom = true"
+                     ng-click="fiches.datepickerFrom = true"
+                     uib-datepicker-popup="dd/MM/yyyy"
+                     datepicker-options="fiches.datepickerOptions"
+                     is-open="fiches.datepickerFrom"
+                     show-button-bar="false"
+                     close-text="Fermer" >
+              <span class="form-control-feedback glyphicon glyphicon-calendar"
+                    aria-hidden="true">
+              </span>
+            </div> 
+
+            <div class="form-group activites-date has-feedback">
+              <label>au</label>
+              <input type="text" class="form-control date-input"
+                     ph="jj/mm/aaaa"
+                     ng-model="fiches.data.event.realDateEnd"
+                     ng-focus="fiches.datepickerTo = true"
+                     ng-click="fiches.datepickerTo = true"
+                     uib-datepicker-popup="dd/MM/yyyy"
+                     datepicker-options="fiches.datepickerOptions"
+                     is-open="fiches.datepickerTo"
+                     show-button-bar="false"
+                     close-text="Fermer" >
+              <span class="form-control-feedback glyphicon glyphicon-calendar"
+                    aria-hidden="true">
+              </span> 
+            </div>
+            
+        </div>
+
+
+    </div>
+</section>

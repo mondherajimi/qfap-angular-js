@@ -1,0 +1,96 @@
+<!-- STICKY -->
+<button type="button" class="btn btn-link btn-sticky-controls"
+        ng-class="{ active: article.stickyControls }"
+        ng-click="article.stickyControls = !article.stickyControls">
+  <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+</button>
+
+<!-- ANCHORS -->
+<div class="controls-group" ng-if="pages.data.anchors.length">
+  <ul class="anchors-list">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         viewBox="0 0 220 42" style="enable-background:new 0 0 220 42;">
+      <defs>
+        <clipPath id="anchors-list-clip" clipPathUnits="objectBoundingBox">
+          <polygon points="1,0 0,0 0,1 1,1 0.92,0.5")></polygon>
+        </clipPath>
+        <clipPath id="anchors-list-clip-fixed">
+          <polygon points="70,0 0,0 0,42 70,42 52,21"></polygon>
+        </clipPath>
+      </defs>
+    </svg>
+    <li class="anchors-list-item" ng-repeat="anchor in pages.data.anchors track by $index">
+      <a href="" class="anchors-list-item-link"
+         ng-click="articleControls.goToAnchor($event, anchor.href)">
+        {{anchor.text}}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- PUBLISH -->
+<div class="controls-group">
+  <button class="btn btn-block btn-icon" ng-click="article.save()"
+          ng-class="pages.events.saved ? 'btn-success' : 'btn-primary'">
+    <i class="fa fa-floppy-o"></i>
+    <span ng-if="!pages.isCreated()">Créer</span>
+    <span ng-if="!pages.isPublished() && pages.isCreated()">Enregistrer</span>
+    <span ng-if="pages.isPublished()">Mettre à jour</span>
+    <i class="fa fa-left" ng-class="{'fa-spinner fa-pulse': pages.events.saving, 'fa-check': pages.events.saved}"></i>
+  </button>
+  <button class="btn btn-block btn-icon" ng-click="article.save(pages.STATUS.published)"
+          ng-class="pages.events.published ? 'btn-success' : 'btn-primary'"
+          ng-if="!pages.isPublished() && pages.isCreated()">
+    <i class="fa fa-cloud-upload"></i> Publier
+    <i class="fa fa-left" ng-class="{'fa-spinner fa-pulse': pages.events.publishing, 'fa-check': pages.events.published}"></i>
+  </button>
+  <p class="text-primary" ng-if="pages.isPublished()">
+    <strong>publié</strong> {{pages.data.publishedAt | dateFormat: '[le] L [à] LT'}}
+  </p>
+</div>
+
+<!-- TYPE -->
+<div class="controls-group">
+  <div class="form-group weight-rating">
+    <uib-rating ng-model="pages.data.weight"
+                max="3" readonly="false" titles="['1','2','3']"
+                on-hover="hoveringOver(value)" on-leave="overStar = null"
+                state-on="'glyphicon-star active'" state-off="'glyphicon-star'">
+    </uib-rating>
+  </div>
+  <div class="form-group">
+    <label for="article-type" class="sr-only">Type</label>
+    <select class="form-control" id="article-type" name="type"
+            ng-options="type.id as type.title for type in articleControls.types"
+            ng-model="pages.data.type" required>
+      <option style="display:none" value="">- Choisissez un type d'article -</option>
+    </select>
+  </div>
+  <div class="form-group" ng-if="pages.isCreated() && articleControls.writersLoaded()">
+    <label for="article-author" class="sr-only">Auteur</label>
+    <select class="form-control" id="article-author" name="writer"
+            ng-options="writer.id as writer.nickname for writer in articleControls.writers"
+            ng-model="articleControls.getSetWriter"
+            ng-model-options="{ getterSetter: true }" required>
+      <option style="display:none" value="">- Choisissez un auteur -</option>
+    </select>
+  </div>
+</div>
+
+<!-- DELETE -->
+<div class="controls-group" ng-if="pages.isCreated()">
+  <button class="btn btn-block btn-icon " ng-click="article.archive()"
+          ng-class="pages.events.archived ? 'btn-success' : 'btn-warning'"
+          ng-if="pages.isPublished()">
+    <i class="fa fa-archive"></i> Archiver
+    <i class="fa fa-left" ng-class="{'fa-spinner fa-pulse': pages.events.archiving, 'fa-check': pages.events.archived}"></i>
+  </button>
+  <p class="text-warning" ng-if="pages.isArchived()">
+    <strong>archivé</strong> {{pages.data.archivedAt | dateFormat: '[le] L [à] LT'}}
+  </p>
+  <button class="btn btn-danger btn-block btn-icon"
+          ng-if="pages.isDraft()" ng-click="article.delete()">
+    <i class="fa fa-trash"></i> Supprimer
+    <i class="fa fa-spinner fa-pulse fa-left" ng-show="pages.events.deleting"></i>
+  </button>
+</div>

@@ -1,0 +1,41 @@
+<table class="table table-condensed table-striped"
+       ng-table-dynamic="dashboard.tableParams with dashboard.tableColumns">
+  <tr ng-repeat="row in $data" ng-click="dashboard.edit(row)">
+    <td ng-repeat="col in $columns" >
+      <div ng-switch="col.dataType">
+        <span ng-switch-default>
+          {{row[col.field]}}
+        </span>
+        <span ng-switch-when="date">
+          {{row[col.field] * 1000 | date:'shortDate'}}
+        </span>
+        <span ng-switch-when="datetime">
+          {{row[col.field] * 1000 | date:'short'}}
+        </span>
+        <span ng-switch-when="type">
+          {{row[col.field] | staticData:dashboard.pagesTypes}}
+        </span>
+        <span ng-switch-when="status">
+          {{row[col.field] | staticData:dashboard.pagesStatus}}
+        </span>
+        <span ng-switch-when="weight">
+          <i class="glyphicon glyphicon-star active"
+             ng-repeat="w in [].constructor(row[col.field]) track by $index">
+          </i>
+        </span>
+        <div ng-switch-when="command">
+          <button class="btn btn-xs btn-link"
+                  ng-click="users.editRow(row)"
+                  uib-tooltip="Modifier">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button class="btn btn-xs btn-link"
+                  ng-click="users.deleteRow(row)"
+                  uib-tooltip="Supprimer">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>

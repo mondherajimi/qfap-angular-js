@@ -1,0 +1,28 @@
+<ul class="list-inline">
+  <li class="dashboard-actions-message">
+    <a href="" ng-click="dashboard.openMessages();">
+      <i class="fa fa-envelope"></i> {{ dashboard.last_message_date | date:'shortDate' }}
+    </a>
+  </li>
+  <li class="dashboard-actions-event">
+    <a ui-sref="fiches({type:1})" ui-sref-opts="{reload: true}">
+      <i class="fa fa-plus"></i>Proposer un événement
+    </a>
+  </li>
+  <li class="dashboard-actions-program"
+      ng-if="dashboard.canCreateProgram()">
+    <a ui-sref="fiches({type:3})" ui-sref-opts="{reload: true}">
+      <i class="fa fa-plus"></i>Proposer un programme
+    </a>
+  </li>
+  <li class="dashboard-actions-activity">
+    <a ui-sref="fiches({type:2})" ui-sref-opts="{reload: true}">
+      <i class="fa fa-plus"></i>Proposer une activité
+    </a>
+  </li>
+  <li class="dashboard-actions-howto">
+    <a href="" ng-click="dashboard.openChoisir();">
+      <i class="fa fa-question"></i>Comment choisir ?
+    </a>
+  </li>
+</ul>
