@@ -1,0 +1,89 @@
+$zindex-medium-toolbar: 990;
+
+.medium-editor-toolbar {
+  // z-index: $zindex-medium-toolbar !important;
+
+  &-actions {
+    button {
+      &:hover {
+        color: $brand-primary !important;
+      }
+    }
+
+    button.medium-editor-button-active {
+      background: $brand-primary !important;
+      background: linear-gradient(to bottom, $brand-primary, rgba(0, 0, 0, 0.89)) !important;
+    }
+
+    .medium-editor-action-h1 {
+      font-family: $font-family-cursive;
+      font-size: 1.2em;
+    }
+    .medium-editor-action-h2 {
+      font-family: $font-family-sans-serif;
+      font-size: 1em;
+      font-weight: 700;
+      letter-spacing: 0.1rem;
+      text-transform: uppercase;
+    }
+    .medium-editor-action-h3 {
+      font-family: $font-family-sans-serif;
+      font-size: 0.8em;
+      font-weight: 700;
+    }
+    .medium-editor-action-bold {
+      font-weight: 700;
+    }
+  }
+
+}
+
+.medium-editor-placeholder {
+
+  &:after {
+    margin: 0 !important;
+  }
+}
+
+
+// medium editor insert plugin
+.medium-editor-insert-plugin {
+
+  .medium-insert-buttons {
+
+    .medium-insert-buttons-show {
+      color: $brand-primary;
+      font-size: 31px;
+      font-weight: 300;
+    }
+
+    .medium-insert-buttons-addons {
+
+      li {
+        margin: 0;
+        vertical-align: top;
+        background-color: transparent !important;
+
+        a.medium-insert-action {
+          margin: 0 8px;
+          color: $brand-primary;
+
+          .medium-insert-action-label {
+            display: inline-block;
+            margin: 10px auto 0 -9px;
+            width: 50px;
+            text-align: center;
+            font-size: 10px;
+            text-decoration: none;
+            text-overflow: ellipsis;
+            line-height: 1.428571;
+          }
+          &:hover .medium-insert-action-label,
+          &:focus .medium-insert-action-label {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

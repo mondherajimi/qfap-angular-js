@@ -1,0 +1,25 @@
+#toast-container {
+
+  & > div {
+    width: 250px !important;
+    padding: 15px !important;
+  }
+
+  .qfap-toast-primary {
+    color: $brand-primary;
+    border: 1px solid $brand-primary;
+    background-color: #fff;
+  }
+  .qfap-toast-success {
+    background-color: $brand-success;
+  }
+  .qfap-toast-info {
+    background-color: $brand-info;
+  }
+  .qfap-toast-warning {
+    background-color: $brand-warning;
+  }
+  .qfap-toast-error {
+    background-color: $brand-danger;
+  }
+}

@@ -1,0 +1,101 @@
+.pull-nav-down {
+    margin-top: $navbar-height;
+}
+.pull-down {
+    margin-top: 20px;
+}
+.wrapper {
+    &.wrapper-body {
+
+    }
+}
+
+.divider-gray {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 1px;
+  background-color: $gray-lighter;
+}
+
+/**
+ * DATETIMEPICKER
+ */
+.datetimepicker-wrapper {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.datetimepicker-wrapper > input {
+  margin-bottom: 0 !important;
+  width: 130px;
+}
+
+.datetimepicker-wrapper [ng-model=hours],
+.datetimepicker-wrapper [ng-model=minutes] {
+  width: 46px !important;
+}
+
+
+datetimepicker > * {
+  display: inline-block;
+  vertical-align: top;
+}
+datetimepicker .dtp-date label {
+  line-height: 34px;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+datetimepicker .dtp-date input {
+  max-width: 128px;
+}
+datetimepicker .dtp-time {
+  padding-top: 12px;
+}
+datetimepicker .dtp-time .btn-link {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+datetimepicker .dtp-time input {
+  width: 40px !important;
+  padding: 6px;
+}
+datetimepicker .dtp-clear {
+  margin-top: 33px;
+  padding: 6px 0px;
+}
+
+/** specific in row bootstrap */
+.row datetimepicker .dtp-time {
+  padding-top: 8px;
+}
+.row datetimepicker .dtp-clear {
+  margin-top: 40px;
+}
+
+/**
+ * BOUTONS
+ */
+.btn-quefaire-supprimer {
+    color:$btn-qufaire-danger-color;
+    background:$btn-qufaire-danger-bg;
+    border:1px solid $btn-qufaire-danger-border;
+    &:hover {
+
+    }
+}
+.btn-quefaire-archiver {
+    color:$btn-qufaire-warning-color;
+    background:$btn-qufaire-warning-bg;
+    border:1px solid $btn-qufaire-warning-border;
+    &:hover {
+
+    }
+}
+.btn-quefaire-publier {
+    color:$btn-qufaire-success-color;
+    background:$btn-qufaire-success-bg;
+    border:1px solid $btn-qufaire-success-border;
+    &:hover {
+
+    }
+}

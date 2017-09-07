@@ -1,0 +1,23 @@
+// PLACE
+.cpnt-place {
+
+  .component-place {
+    cursor: pointer;
+
+    &:hover, &:focus {
+      color: #fff;
+      background-color: $brand-primary;
+
+      .component-place-error {
+        color: #fff;
+      }
+    }
+
+    &-error {
+      margin: 10px 0 0 0;
+      color: $brand-danger;
+      font-size: 80%;
+      font-style: italic;
+    }
+  }
+}

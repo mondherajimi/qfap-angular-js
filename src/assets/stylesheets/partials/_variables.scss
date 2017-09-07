@@ -1,0 +1,192 @@
+//
+// Variables
+// --------------------------------------------------
+$quefaire-primary:          #f94f4f !default;
+$quefaire-success:          #6ac872 !default;
+$quefaire-info:             #5bc0de !default;
+$quefaire-warning:          #f2b200 !default;
+$quefaire-active:           #f7f5ef !default;
+$quefaire-danger:           #db4739 !default;
+
+// $brand-primary:             $quefaire-primary !default;
+
+$quefaire-primary-base:     $quefaire-primary !default;
+
+$quefaire-primary-darker:   lighten($quefaire-primary-base, 13.5%) !default; // #222
+$quefaire-primary-dark:     lighten($quefaire-primary-base, 20%) !default;   // #333
+// $quefaire-primary:       lighten($quefaire-primary-base, 33.5%) !default; // #555
+$quefaire-primary-light:    lighten($quefaire-primary-base, 46.7%) !default; // #777
+$quefaire-primary-lighter:  lighten($quefaire-primary-base, 93.5%) !default; // #eee
+
+$quefaire-favorite:         #f5c832 !default;   //FFD700
+$quefaire-favorite-light:   #fae9b0 !default;
+$quefaire-favorite-lighter: #FFED85 !default; // FFED85
+
+$quefaire-green:            #6ac772 !default;
+$quefaire-form-border:      #a3a3a3 !default;;
+
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+// $font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+// $font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
+// //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+// $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
+// $font-family-base:        $font-family-sans-serif !default;
+
+$font-size-base:            14px !default;
+$font-size-largest:         floor(($font-size-base * 2.6)) !default; // ~36px
+$font-size-larger:          floor(($font-size-base * 2.15)) !default; // ~30px
+// $font-size-h3:           ceil(($font-size-base * 1.7)) !default; // ~24px
+
+//** By default, this inherits from the `<body>`.
+$headings-font-family:    'futura';
+$headings-font-weight:    bold;
+$headings-color:          $quefaire-primary;
+
+
+
+
+$white:                 #fff !default;
+$white-darker:          darken($white, 6.5%) !default;
+$white-light:           rgba(255, 255, 255, 0.75) !default;
+
+$blue-base:             #00f !default;
+$blue-lightest:         rgba(141, 192, 219, 0.25) !default;
+
+$gray-base:             #000 !default;
+$gray-quefaire:         #959595 !default;
+
+$gray-darker:           lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:             lighten($gray-base, 20%) !default;   // #333
+$gray:                  lighten($gray-base, 33.5%) !default; // #555
+$gray-light:            lighten($gray-base, 46.7%) !default; // #777
+$quefaire-gray-light:   lighten($gray-base, 86.5%) !default; // #ddd
+$gray-lighter:          lighten($gray-base, 93.5%) !default; // #eee
+
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Global textual link color.
+$link-color:            $quefaire-primary !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      darken($link-color, 15%) !default;
+//** Link hover decoration.
+$link-hover-decoration: underline !default;
+
+
+//== Navbar
+//
+//##
+
+// Basics of a navbar
+$navbar-height:         114px !default;
+
+$navbar-default-color:  #fff !default;
+$navbar-default-bg:     $quefaire-primary !default;
+$navbar-default-border: darken($navbar-default-bg, 6.5%) !default;
+
+// Navbar links
+$navbar-default-link-color:                #fff !default;
+// $navbar-default-link-hover-color:          $white-darker !default;
+$navbar-default-link-hover-color:          $gray !default;
+$navbar-default-link-hover-bg:             transparent !default;
+$navbar-default-link-active-color:         #fff !default;
+$navbar-default-link-active-bg:            darken($navbar-default-bg, 6.5%) !default;
+$navbar-default-link-disabled-color:       #ccc !default;
+$navbar-default-link-disabled-bg:          transparent !default;
+
+// Navbar brand label
+$navbar-default-brand-color:               $navbar-default-link-color !default;
+$navbar-default-brand-hover-color:         darken($navbar-default-brand-color, 10%) !default;
+$navbar-default-brand-hover-bg:            transparent !default;
+
+//== Dropdowns
+//
+//## Dropdown menu container and contents.
+
+//** Dropdown link text color.
+// $dropdown-link-color:            $gray-dark !default;
+//** Hover color for dropdown links.
+$dropdown-link-hover-color:      $white !default;
+//** Hover background for dropdown links.
+$dropdown-link-hover-bg:         $quefaire-primary !default;
+
+//== Buttons
+//
+// Default appears as gray
+$btn-qufaire-default-color:             $white !default;
+$btn-qufaire-default-bg:                $gray-quefaire !default;
+$btn-qufaire-default-border:            darken($btn-qufaire-default-bg, 5%) !default;
+
+// Primary appears as corail
+$btn-qufaire-primary-color:             $white !default;
+$btn-qufaire-primary-bg:                $quefaire-primary !default;
+$btn-qufaire-primary-border:            darken($btn-qufaire-primary-bg, 5%) !default;
+
+// Success appears as green
+$btn-qufaire-success-color:             $white !default;
+$btn-qufaire-success-bg:                $quefaire-success !default;
+$btn-qufaire-success-border:            darken($btn-qufaire-success-bg, 5%) !default;
+
+// Info appears as blue-green
+$btn-qufaire-info-color:                $white !default;
+$btn-qufaire-info-bg:                   $quefaire-info !default;
+$btn-qufaire-info-border:               darken($btn-qufaire-info-bg, 5%) !default;
+
+
+// Warning appears as orange
+$btn-qufaire-warning-color:             $white !default;
+$btn-qufaire-warning-bg:                $quefaire-warning !default;
+$btn-qufaire-warning-border:            darken($btn-qufaire-warning-bg, 5%) !default;
+
+// Danger and error appear as red
+$btn-qufaire-danger-color:              $white !default;
+$btn-qufaire-danger-bg:                 $quefaire-danger !default;
+$btn-qufaire-danger-border:             darken($btn-qufaire-danger-bg, 5%) !default;
+
+//== Pagination
+//
+//##
+
+$pagination-color:                     $gray-quefaire !default;
+// $pagination-bg:                        #fff !default;
+// $pagination-border:                    #ddd !default;
+
+$pagination-hover-color:               $white !default;
+$pagination-hover-bg:                  $quefaire-primary !default;
+$pagination-hover-border:              $quefaire-primary !default;
+
+// $pagination-active-color:              #fff !default;
+$pagination-active-bg:                 $quefaire-primary !default;
+$pagination-active-border:             $quefaire-primary !default;
+
+// $pagination-disabled-color:            $gray-light !default;
+// $pagination-disabled-bg:               #fff !default;
+// $pagination-disabled-border:           #ddd !default;
+
+
+//== Table
+//
+//##
+// $table-bg-accent: $quefarie-primary;
+
+
+//== Controls panel
+//
+//##
+$controls-panel-page-height: 60px;
+$controls-panel-page-width: 125px;
+$controls-panel-page-width-active: 160px;
+
+$controls-panel-page-top: 124px;
+$controls-panel-page-left: 0;
+
+
+
+
+

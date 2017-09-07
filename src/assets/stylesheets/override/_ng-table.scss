@@ -1,0 +1,54 @@
+// table
+.ng-table {
+  border: 1px solid #ddd;
+  border-collapse: initial;
+  padding: 15px 10px;
+  border-radius: 3px;
+
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  // command cell
+  .cell-command {
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .filter, .add {
+    vertical-align: middle;
+  }
+}
+
+// pagination
+.ng-table-pagination {
+  margin-top: 0 !important;
+}
+
+// counts
+.ng-table-counts {
+  margin-bottom: $line-height-computed;
+  border-radius: $border-radius-xlarge;
+
+  .btn:first-child {
+    border-bottom-left-radius: $border-radius-xlarge !important;
+       border-top-left-radius: $border-radius-xlarge !important;
+  }
+  .btn:last-child {
+    border-bottom-right-radius: $border-radius-xlarge !important;
+       border-top-right-radius: $border-radius-xlarge !important;
+  }
+
+  .btn-default {
+    @include button-inverse($btn-primary-color, $btn-primary-bg);
+
+    color: $gray;
+    border-color: #ddd;
+
+    &:focus,
+    &.focus,
+    &:hover {
+      border-color: #ddd;
+    }
+  }
+}

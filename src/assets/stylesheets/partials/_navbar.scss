@@ -1,0 +1,108 @@
+.navbar-quefaire {
+    border-radius: 0 !important;
+    text-transform: uppercase;
+    .fa {
+        font-size: $font-size-large;
+    }
+}
+.navbar-quefaire .navbar-brand {
+    display: block;
+    width: 160px;
+    background: url($images-path + '/logo-quefaire-admin.jpg') no-repeat center center;
+}
+.navbar-sub {
+    margin-top: $navbar-height + 10px;
+
+    &.pager {
+        li {
+            & > a,
+            & > span {
+                border: none;
+                &:hover,
+                &:focus {
+                    // text-decoration: underline;
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    .item {
+        .fa {
+            display: inline-block;
+            height: 2.2em;
+            width: 2.2em;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 2.2em;
+            color: $white;
+        }
+
+        & > a {
+            color: $gray-base;
+        }
+
+        &.item-mail {
+            & > a {
+                &:hover,
+                &:focus {
+                    color: $quefaire-primary;
+                }
+                .fa {
+                    background-color: $quefaire-primary;
+                }
+            }
+            &.active > a {
+                color: $quefaire-primary;
+            }
+        }
+
+        &.item-add-event,
+        &.item-add-program {
+            & > a {
+                &:hover,
+                &:focus,
+                &.active {
+                    color: $quefaire-warning;
+                }
+                .fa {
+                    background-color: $quefaire-warning;
+                }
+            }
+            &.active > a {
+                color: $quefaire-warning;
+            }
+        }
+        &.item-add-activity {
+            & > a {
+                &:hover,
+                &:focus,
+                &.active {
+                    color: $quefaire-success;
+                }
+                .fa {
+                    background-color: $quefaire-success;
+                }
+            }
+            &.active > a {
+                color: $quefaire-success;
+            }
+        }
+        &.item-question {
+            & > a {
+                &:hover,
+                &:focus,
+                &.active {
+                    color: $quefaire-primary;
+                }
+                .fa {
+                    color: $quefaire-primary;
+                    background-color: $quefaire-active;
+                }
+            }
+            &.active > a {
+                color: $quefaire-primary;
+            }
+        }
+    }
+}

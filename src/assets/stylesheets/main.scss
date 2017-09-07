@@ -1,0 +1,71 @@
+/**
+ * Main style file
+ *
+ * NB: ~ is resolved to node_modules path by webpack
+ */
+
+
+// Styleguide
+$sg-font-path: "~quefaire-livingstyleguide/src/fonts/";
+@import "~quefaire-livingstyleguide/src/base/all";
+@import "~quefaire-livingstyleguide/src/components/all";
+@import "~quefaire-livingstyleguide/src/modules/button/_style";
+
+// Bootstrap
+@import "bootstrap/bootstrap";
+
+// Font awesome
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+
+// Toastr
+@import "~angular-toastr/dist/angular-toastr.css";
+
+// ngTable
+@import "~ng-table/dist/ng-table.css";
+
+// ngTagsInput
+@import "~ng-tags-input/build/ng-tags-input.css";
+
+// Medium Editor
+@import "~medium-editor/dist/css/medium-editor.css";
+@import "~medium-editor/dist/css/themes/default.css";
+@import "~medium-editor-insert-plugin/dist/css/medium-editor-insert-plugin.css";
+
+// Images
+$images-path: "../images";
+
+@import "app/mixins";
+
+// Overrides
+@import "override/styleguide";
+@import "override/bootstrap";
+@import "override/ng-table";
+@import "override/toastr";
+@import "override/medium-editor";
+
+// App
+@import "app/layout";
+@import "app/elements";
+@import "app/form";
+
+// Components
+@import "components/header";
+@import "components/editor";
+@import "components/cpntModals";
+
+// Directives
+@import "directives/controls";
+
+// Modules
+@import "modules/login";
+@import "modules/dashboard";
+@import "modules/pages/pages";
+
+
+@import "partials/variables";
+@import "partials/common";
+@import "modules/fiches";
+
+// Utility classes
+// @import "partials/utilisties";

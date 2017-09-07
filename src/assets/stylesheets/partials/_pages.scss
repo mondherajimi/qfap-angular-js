@@ -1,0 +1,53 @@
+.wrapper-pages {
+	h2 {
+		color:$quefaire-primary;
+    }
+    .section-pages {
+      padding-top: 20px;
+      padding-bottom: 20px;
+
+    }
+    .wrapper-component {
+        min-height: 300px;
+    }
+    .wrapper-lieu {
+        padding: 45px;
+        background-color: $quefaire-active;
+        position: relative;
+    }
+
+    .wrapper-add-image {
+        position: relative;
+        width: 100%;
+
+        .no-image {
+            height:250px;
+            background:#ccc;
+        }
+    }
+
+    .wrapper-controls {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        bottom: -1em;
+    }
+
+    .wrapper-periode {
+        .wrapper-multiple-dates {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: separate;
+            position: relative;
+            vertical-align: middle;
+            margin: 20px auto;
+
+            > .weekDay {
+                float: none;
+                display: table-cell;
+                width: 1%;
+            }
+        }
+    }
+}

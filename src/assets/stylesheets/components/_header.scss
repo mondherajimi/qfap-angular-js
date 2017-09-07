@@ -1,0 +1,250 @@
+$navbar-brand-padding-vertival: $navbar-padding-horizontal;
+$navbar-brand-img-height: ($navbar-height - (2 * $navbar-brand-padding-vertival));
+
+.navbar {
+  border: none;
+
+  // brand
+  .navbar-brand {
+    padding-top: $navbar-brand-padding-vertival;
+    padding-bottom: $navbar-brand-padding-vertival;
+
+    img {
+      height: $navbar-brand-img-height;
+    }
+  }
+
+  // nav links
+  .navbar-nav {
+    font-weight: 300;
+
+    &-howto {
+      font-size: 11px;
+
+      span {
+        display: block;
+        border-top: 1px solid $navbar-default-link-color;
+      }
+    }
+
+    > li > a {
+      text-transform: uppercase;
+
+      .fa {
+        margin-right: 5px;
+      }
+    }
+
+    > li.divider {
+      border-top: 1px solid $navbar-default-color;
+      width: (2 * $navbar-brand-padding-vertival);
+      margin-left: $navbar-brand-padding-vertival;
+
+      @media (min-width: $grid-float-breakpoint) {
+        border-left: 1px solid $navbar-default-color;
+        border-top: none;
+        height: (2 * $navbar-brand-padding-vertival);
+        width: 0;
+        margin-top: ($navbar-brand-img-height / 2);
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+// SASS STYLESHEET
+/*@font-face {
+  font-family: 'Futura';
+  src: url('../fonts/302C71_0_0.eot');
+  src: url('../fonts/302C71_0_0.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/302C71_0_0.woff2') format('woff2'),
+       url('../fonts/302C71_0_0.woff') format('woff'),
+       url('../fonts/302C71_0_0.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}*/
+
+.guide-modal{
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: rgba(249,79,79,0.95);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    font-family: 'Futura';
+    font-weight: 300;  
+    /*height: 100%;*/
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    left: 0;
+    overflow: auto;
+    padding: 0 10rem;
+    position: fixed;
+    /*top: 0;*/
+    width: 100%;
+  
+    &-wrapper {
+      margin: 0 auto;
+      max-width: 110rem;
+      width: 100%;
+      
+    .guide-modal-items {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+    
+      .guide-modal-item {
+        position: relative;
+        width: 31%;
+        min-width: 320px;
+      
+        ul.guide-modal-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+
+          li {
+            color: #ffffff;
+            display: inline-block;
+            height: 150px;
+            padding-right: 10px;
+            vertical-align: top;
+            width: 100%;
+            
+            &.social {
+              display: -webkit-box;
+              display: -webkit-flex;
+              display: -ms-flexbox;
+              display: inline-flex;
+            }
+            >span{
+              -webkit-box-align: center;
+              -webkit-align-items: center;
+              -ms-flex-align: center;
+              align-items: center;
+              border-radius: 50%;
+              border:3px solid white;
+              float: left;
+              font-size: 24px;
+              display: -webkit-box;
+              display: -webkit-flex;
+              display: -ms-flexbox;
+              display: inline-flex;
+              height: 60px;
+              width: 60px;
+              -webkit-box-pack: justify;
+              -webkit-justify-content: center;
+              -ms-flex-pack: justify;
+              justify-content: center;
+            }
+            
+            p{
+              font-size: 26px;
+              line-height: 26px;
+              margin-left: 70px;
+              margin-top: 15px;
+              max-width: 220px;
+              text-transform: uppercase;
+              vertical-align: bottom;
+
+              &.social-item{
+                font-size: 20px;
+                margin-left:0;
+              }
+              
+              span.icon1{
+              background: url('../images/idea.svg') no-repeat;
+              background-position: 0 -3px;
+              }
+
+              span.icon2{
+              background: url('../images/search.svg') no-repeat;
+              background-position: 0 -3px;
+              }
+
+              span.icon3{
+              background: url('../images/edit.svg') no-repeat;
+              background-position: 0 -3px;
+              }
+
+              span.icon4{
+              background: url('../images/read.svg') no-repeat;
+              background-position: 0 -9px;
+              }
+
+              span.icon5{
+              background: url('../images/check.svg') no-repeat;
+              background-position: 0 -3px;
+              }
+
+              span.icon6{
+              background: url('../images/mail.svg') no-repeat;
+              background-position: 0 -8px;
+              }
+            
+              span.icon{
+                background-size:40px 40px;
+                display: block;
+                float: left;
+                height: 40px;
+                margin-right: 10px;
+                width: 40px;
+				border: none;
+              }
+            } 
+            
+            .wrap-social{
+              -webkit-box-align: center;
+              -webkit-align-items: center;
+              -ms-flex-align: center;
+              align-items: center;
+              float:left;
+              display: -webkit-box;
+              display: -webkit-flex;
+              display: -ms-flexbox;
+              display: flex;
+              flex-direction: column;
+              width: 25%;
+              
+              span.icon7{
+                background: url('../images/fb.svg') no-repeat;
+                background-position: 0 3px;
+              }
+              
+              span.icon8{
+                background: url('../images/tw.svg') no-repeat;
+                background-position: 0 3px;
+              }
+              
+              span.icon9{
+                background: url('../images/heart.svg') no-repeat;
+                background-position: 0 3px;
+              }
+              
+              span.icon2{
+                background-size:60px 60px;
+                display: block;
+                height: 60px;
+                margin-right: 0px;
+                width: 60px;
+				border: none;
+              }
+            
+              }
+            }
+          }
+        }
+      }
+  }
+}
+

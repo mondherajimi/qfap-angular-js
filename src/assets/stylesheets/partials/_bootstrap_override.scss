@@ -1,0 +1,59 @@
+// Feedback icon (requires .glyphicon classes)
+.form-control {
+  height: $input-height-base !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+}
+.form-control, .form-control-feedback {
+  line-height: $input-height-base !important;
+  top: 0.3em;
+}
+
+textarea.form-control {
+  height: auto !important;
+}
+.input-lg + .form-control-feedback,
+.input-group-lg + .form-control-feedback,
+.form-group-lg .form-control + .form-control-feedback {
+  line-height: $input-height-large !important;
+}
+.input-sm + .form-control-feedback,
+.input-group-sm + .form-control-feedback,
+.form-group-sm .form-control + .form-control-feedback {
+  line-height: $input-height-small !important;
+}
+
+// override glyphicons by font awesome icons
+.glyphicon {
+  @extend .fa;
+
+  // override datepicker icons
+  &.glyphicon-chevron-right {
+    @extend .fa-chevron-right;
+  }
+  &.glyphicon-chevron-left {
+    @extend .fa-chevron-left;
+  }
+  // override datepicker icons
+  &.glyphicon-chevron-up {
+    @extend .fa-chevron-up;
+  }
+  &.glyphicon-chevron-down {
+    @extend .fa-chevron-down;
+  }
+
+  // override rating icons
+  &.glyphicon-star {
+    @extend .fa-star;
+  }
+  &.glyphicon-star-empty {
+    @extend .fa-star-o;
+  }
+}
+
+// override table styles
+.table-striped {
+    > tbody > tr:nth-of-type(odd) {
+        background-color: $quefaire-active;
+    }
+}

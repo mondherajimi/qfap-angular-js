@@ -1,0 +1,58 @@
+basic-editor.form-control {
+  height: initial;
+  min-height: 100px;
+}
+
+inline-editor.form-control {
+
+}
+
+components-editor {
+  display: block;
+  padding: 40px 0;
+
+  // components
+  .component {
+    position: relative;
+  }
+  .component:not(.component-text) {
+    cursor: pointer;
+
+    & > * {
+      pointer-events: none;
+    }
+  }
+  .component:not(.component-text) + .component:not(.component-text):hover:before,
+  .component:not(.component-text) + .component:not(.component-text):focus:before,
+  .component:not(.component-text):first-child:hover:before,
+  .component:not(.component-text):first-child:focus:before,
+  .component:not(.component-text):last-child:hover:after,
+  .component:not(.component-text):last-child:focus:after {
+    content: "insérer un composant texte";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    clear: both;
+    width: 100%;
+    // font: normal normal normal 14px/1 FontAwesome;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 35px;
+    color: $brand-primary;
+    border: 1px solid $brand-primary;
+    border-radius: 0 0 4px 4px;
+  }
+  .component:not(.component-text) + .component:not(.component-text):hover:before,
+  .component:not(.component-text) + .component:not(.component-text):focus:before,
+  .component:not(.component-text):first-child:hover:before,
+  .component:not(.component-text):first-child:focus:before {
+    top: -35px;
+    border-radius: 4px 4px 0 0;
+  }
+  .component:not(.component-text):last-child:hover:after,
+  .component:not(.component-text):last-child:focus:after {
+    bottom: -35px;
+  }
+
+}

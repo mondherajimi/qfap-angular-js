@@ -1,0 +1,307 @@
+.wrapper-fiches {
+  h2 {
+    color:$quefaire-primary;
+    border-top:1px solid $quefaire-primary;
+    padding-top:25px;
+  }
+  h3 {
+    font-family: 'Montserrat';
+    border-bottom:1px solid $quefaire-gray-light;
+    padding-bottom:15px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+    .section-pages {
+      padding-top: 20px;
+      padding-bottom: 20px;
+
+    }
+    .wrapper-component {
+        min-height: 300px;
+    }
+    .wrapper-lieu {
+        padding: 45px;
+        background-color: $quefaire-active;
+        position: relative;
+    }
+
+    .wrapper-add-image {
+        position: relative;
+        width: 100%;
+        text-align: center;
+
+        .no-image {
+            height:250px;
+            background:#ccc;
+        }
+
+        .image {
+          max-height:250px;
+          overflow:hidden;
+        }
+    }
+
+    .wrapper-controls {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        bottom: -1em;
+    }
+
+    .wrapper-periode {
+        .wrapper-multiple-dates {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: separate;
+            position: relative;
+            vertical-align: middle;
+            margin: 20px auto;
+
+            > .weekDay {
+                float: none;
+                display: table-cell;
+                width: 1%;
+            }
+        }
+    }
+
+    .components-editor {
+      display: block;
+      padding:0px 0 10px;
+    }
+}
+
+input.ng-invalid.ng-touched {
+  border-color: #FA787E;
+}
+
+
+#form-search-lieu {
+  width:60%;
+}
+
+.results-lieu {
+  margin-top: -15px;
+  margin-bottom: 20px;
+  position: absolute;
+  margin-left: 0px;
+  border: 1px solid #ccc;
+  border-radius:3px;
+  width: 50%;
+  z-index: 1;
+  background: white;
+}
+
+.wrapper-activites, {
+  label{
+    font-weight:normal;
+  }
+  .activites-date {
+    .date-input {
+      width:130px;
+    }
+  }
+  .activites-exception {
+    margin-left:20px;
+  }
+  .activites-autres-exceptions {
+    margin-top:20px;
+    margin-bottom:20px;
+    textarea {
+
+    }
+  }
+}
+
+/* Associer programme */
+.wrapper-associer {
+  margin-top:30px;
+}
+
+.row-result-associe-fiche {
+  background:#f1f1f1;
+  padding:5px;
+  margin:10px 0;
+  min-height:50px;
+}
+
+.search-associe-fiche {
+  background:#f1f1f1;
+  padding:5px;
+  margin:10px 0 0 0;
+  min-height:50px;
+}
+
+.results-search-fiche {
+  margin-top: -15px;
+  left: 325px;
+  margin-bottom: 20px;
+  position: absolute;
+  margin-left: 0px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 383px;
+  z-index: 1;
+  background: white;
+  border-top: 0;
+}
+
+/**
+ * Seances 
+ */
+.wrapper-seances {
+  margin-bottom:50px;
+  margin-top:20px;
+    .seances-days {
+      margin-bottom:20px;
+      .seance-day {
+        margin-left:15px;
+        margin-right:50px;
+      }
+    }
+    .seance-from,
+    .seance-to {
+      max-width:100px;
+    }
+}
+
+.wrapper-seances-ok {
+  margin-bottom:20px;
+  margin-top:20px;
+} 
+
+.seance-ok {
+  color:$quefaire-primary;
+  padding:10px;
+  border:1px solid $quefaire-gray-light;
+  border-radius:2px;
+  float:left;
+  margin-right:20px;
+  position:relative;
+}
+
+.seance-delete {
+  top:-10px;
+  right:-10px;
+  position: absolute;
+  width:22px;
+  height:22px;
+  i {
+    background:$quefaire-primary;
+    border-radius: 22px;
+    color: #fff;
+    display: block;
+    width: 22px;
+    text-align: center;
+    height: 22px;
+    font-weight: normal;
+    padding-top: 4px;
+  }
+}
+
+.periode-exception {
+  margin:20px 0;
+  background:$quefaire-gray-light;
+  padding:10px 20px;
+}
+
+.wrapper-evenements {
+  .date-input{
+    width:120px;
+    font-size:11px;
+  }
+}
+
+.categories-block {
+  margin-right:45px;
+  border:1px solid $quefaire-gray-light;
+  padding:10px;
+  min-width:25%;
+  min-height:280px;
+  margin-bottom:40px;
+}
+
+.wrapper-tags {
+  .checkbox {
+    margin-right:20px;
+  }
+}
+
+.controls-panel {
+  position:fixed;
+  top: $controls-panel-page-top;
+  left: $controls-panel-page-left;
+  z-index: 50;
+
+  margin: 0;
+  padding: 0;
+
+
+  list-style: none;
+  list-style-position: inside;
+
+  li {
+    margin: 0;
+    padding: 0;
+
+    a {
+      display: block;
+      height: $controls-panel-page-height;
+      width: $controls-panel-page-width;
+      padding: 0;
+      margin-bottom: 6px;
+      border-top: ($controls-panel-page-height/2) solid grey;
+      border-bottom: ($controls-panel-page-height/2) solid grey;
+      border-right: 10px solid transparent;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      font-family: 'Futura';
+      font-weight: 300;
+      font-size: 27px;
+      letter-spacing: 0.5px;
+      line-height: 0;
+      transition: width .2s;
+      cursor: pointer;
+      @media (max-width: $screen-lg-min) {
+        font-size:18px;
+        width: 80px;
+      }
+
+      &.active {
+        width: $controls-panel-page-width-active;
+        border-top-color: $quefaire-primary;
+        border-bottom-color: $quefaire-primary;
+        @media (max-width: $screen-lg-min) {
+          width: 110px;
+        }
+      }
+      &.complete {
+        border-top-color: $quefaire-green;
+        border-bottom-color: $quefaire-green;
+      }
+      &:hover{
+        border-top-color: $quefaire-primary;
+        border-bottom-color: $quefaire-primary;
+      }
+    }
+  }
+
+}
+
+.sticky-menu {
+  position:fixed;
+  top:110px;
+  right:10%;
+  margin-top:0;
+  border:2px solid $quefaire-primary;
+  padding:5px;
+  z-index: 1;
+  background:white;
+  opacity:.9;
+  &:hover{
+    opacity:1;
+  }
+}
+

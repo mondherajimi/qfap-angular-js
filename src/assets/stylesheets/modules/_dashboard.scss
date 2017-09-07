@@ -1,0 +1,137 @@
+$dashboard-section-padding-vertical: 30px;
+
+/* ACTIONS */
+.dashboard-actions {
+  position: relative;
+  padding: $dashboard-section-padding-vertical 0;
+
+  ul {
+    margin: 0;
+  }
+
+  li {
+    padding: 5px;
+
+    a {
+      color: $gray-dark;
+      font-weight: 300;
+      text-transform: uppercase;
+      text-decoration: none;
+
+      &:hover, &:focus {
+        text-decoration: underline;
+      }
+
+      .fa {
+        height: 32px;
+        width: 32px;
+        padding: 9px 0;
+        margin-right: 5px;
+        color: #fff;
+        text-align: center;
+        border-radius: 50%;
+        background-color: $brand-info;
+      }
+    }
+  }
+  li.dashboard-actions-message {
+    a {
+      color: $brand-danger;
+      .fa {
+        background-color: $brand-danger;
+      }
+    }
+  }
+  li.dashboard-actions-event,
+  li.dashboard-actions-program {
+    a {
+      .fa {
+        background-color: $qfap-yellow;
+      }
+    }
+  }
+  li.dashboard-actions-activity {
+    a {
+      .fa {
+        background-color: $qfap-light-green;
+      }
+    }
+  }
+  li.dashboard-actions-howto {
+    a {
+      .fa {
+        color: $brand-primary;
+        background-color: $qfap-beige;
+      }
+    }
+  }
+}
+
+/* FILTERS */
+.dashboard-filters {
+  position: relative;
+  padding: $dashboard-section-padding-vertical 0;
+  background-color: $qfap-beige;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: (-$grid-gutter-width / 2);
+    z-index: -1;
+    width: 100vw;
+    height: 100%;
+    background-color: $qfap-beige;
+    content: ' ';
+
+    @media (min-width: $screen-sm-min) {
+      left: calc((#{$container-sm} - #{$grid-gutter-width} - 100vw) / 2);
+    }
+    @media (min-width: $screen-md-min) {
+      left: calc((#{$container-md} - #{$grid-gutter-width} - 100vw) / 2);
+    }
+    @media (min-width: $screen-lg-min) {
+      left: calc((#{$container-lg} - #{$grid-gutter-width} - 100vw) / 2);
+    }
+  }
+
+  .dashboard-filters-search {
+
+    & > * {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .form-group {
+
+      @media (min-width: $screen-sm-min) {
+        width: 50%;
+      }
+    }
+  }
+
+
+  .dashboard-filters-more {
+
+    .form-inline > .form-group {
+      margin-right: 5px;
+      margin-bottom: 15px;
+    }
+
+    .date-input {
+
+      @media (min-width: $screen-sm-min) {
+        width: 140px;
+      }
+    }
+
+    .glyphicon-star {
+      font-size: $font-size-xlarge;
+    }
+  }
+}
+
+/* TALBE */
+.dashboard-table {
+  padding: $dashboard-section-padding-vertical 0;
+
+}

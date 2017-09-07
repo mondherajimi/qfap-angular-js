@@ -1,0 +1,81 @@
+//== Rating
+//
+//##
+.ng-rating {
+  font-size: $font-size-larger;
+  i {
+    color: $quefaire-favorite-light;
+    cursor: pointer;
+
+    &.glyphicon-star {
+      color: $quefaire-favorite-light;
+      &.active {
+        color: $quefaire-favorite;
+      }
+    }
+    &.glyphicon-star-empty {
+      color: $quefaire-favorite-light;
+    }
+  }
+
+  &.list-item-rating {
+    font-size: $font-size-base;
+  }
+}
+
+//== Controls panel
+//
+//##
+.controls-panel {
+  position:fixed;
+  top: $controls-panel-page-top;
+  left: $controls-panel-page-left;
+
+  margin: 0;
+  padding: 0;
+
+
+  list-style: none;
+  list-style-position: inside;
+
+  li {
+    margin: 0;
+    padding: 0;
+
+    a {
+      display: block;
+      text-align: center;
+      font-family: 'futura';
+      font-weight: bold;
+      font-size: 18px;
+      letter-spacing: -0.1px;
+      height: $controls-panel-page-height;
+      width: $controls-panel-page-width;
+      padding: 0;
+      line-height: 60px;
+      -webkit-transition: width .2s;
+        transition: width .2s;
+      margin-bottom: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      color:#fff;
+      background-image: url('../../assets/images/pages-bg-tab.jpg');
+      background-position: bottom right;
+      background-repeat: no-repeat;
+      background-color: $gray-quefaire;
+
+      &.active {
+        background-color: $quefaire-primary;
+        background-position: 100% 0%;
+        width: $controls-panel-page-width-active;
+      }
+      &:hover{
+        background-color: $quefaire-green;
+        background-position: 100% 50%;
+      }
+    }
+  }
+
+}
+
+

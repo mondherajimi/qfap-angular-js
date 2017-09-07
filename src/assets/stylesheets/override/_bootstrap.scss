@@ -1,0 +1,103 @@
+// button
+.btn {
+  .fa { vertical-align: middle; }
+}
+
+// button primary
+.btn-primary {
+  @include button-inverse($btn-primary-color, $btn-primary-bg);
+}
+
+// page header
+.page-header {
+  h1 {
+    display: inline;
+  }
+}
+
+// pagination
+.pagination {
+  border-radius: $border-radius-xlarge;
+
+  > li {
+    &:first-child {
+      > a,
+      > span {
+        @include border-left-radius($border-radius-xlarge);
+      }
+    }
+    &:last-child {
+      > a,
+      > span {
+        @include border-right-radius($border-radius-xlarge);
+      }
+    }
+  }
+}
+
+// form-control-feedback
+.form-control-feedback {
+  color: $input-color-placeholder;
+}
+
+// glyphicon star
+&.glyphicon-star {
+  color: lighten($qfap-yellow, 17%);
+
+  &.active { color: $qfap-yellow; }
+}
+&.glyphicon-star-empty {
+  color: lighten($qfap-yellow, 17%);
+}
+
+// tabs
+.tab-content > .tab-pane {
+  display: block;
+}
+
+// modal
+.modal-dialog {
+  overflow: initial;
+}
+
+.modal-body {
+  max-height: calc(100vh - 210px);
+  overflow: auto;
+}
+
+.modal-header .close {
+  font-size: 36px;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  &:before, &:after {
+    display: none;
+  }
+
+  .btn {
+    margin-left: auto;
+  }
+
+  .alert + .btn {
+    margin-left: 15px;
+  }
+
+  .alert {
+    padding: 6px 15px;
+    margin-right: auto;
+    margin-bottom: 0;
+    text-align: left;
+  }
+}
+
+.form-inline {
+  .uib-time {
+    .form-control {
+      width:50px;
+    }
+  }
+}

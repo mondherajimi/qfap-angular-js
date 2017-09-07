@@ -1,0 +1,29 @@
+// button icon
+.btn-icon {
+  position: relative;
+
+  .fa {
+    vertical-align: initial;
+  }
+  .fa-left {
+    position: absolute;
+    left: 12px;
+    line-height: inherit;
+  }
+  .fa-right {
+    position: absolute;
+    right: 12px;
+    line-height: inherit;
+  }
+}
+
+// masonry layout
+.masonry-layout {
+  column-count: 2;
+  column-gap: 5px;
+
+  &-brick {
+    break-inside: avoid;
+    margin: 5px 0;
+  }
+}

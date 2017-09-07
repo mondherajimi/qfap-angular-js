@@ -1,0 +1,143 @@
+// Text selection
+::selection {
+  background: transparentize($brand-primary, 0.6);
+}
+img::selection,
+video::selection,
+iframe::selection {
+  background: transparent;
+}
+
+// Components
+// text
+.component-text {
+
+  h2 {
+    display: block;
+
+    &:after { content: none; }
+  }
+
+  h3, h4 {
+    font-family: $font-family-sans-serif;
+  }
+}
+// highlight
+.component-highlight {
+  &-title h2 {
+    font-family: $font-family-sans-serif;
+  }
+}
+// place
+.component-place {
+  overflow: visible;
+  @include clearfix;
+
+  &-wrapper {
+    display: inline-block;
+    float: none;
+  }
+}
+// verbatim
+.component-verbatim {
+  float: none;
+
+  // bootstrap override
+  footer {
+    font-size: inherit;
+    color: inherit;
+
+    &:before { content: none; }
+  }
+}
+// quiz
+.component-quiz {
+	
+  &-option-hided {
+    display: none;
+    font-size: 1.4rem;
+    line-height: 2.5rem;
+
+    input {
+      margin-right: 1rem;
+    }
+  }
+  
+  &-edit-buttons {
+    font-size: 32px;
+    color: #f94f4f;
+  }
+}
+
+
+// input[type="text"],
+// input[type="tel"],
+// input[type="url"],
+// input[type="email"] {
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+//   height: 34px;
+//   margin: 0;
+//   padding: 6px 12px;
+//   font-size: 14px;
+//   color: inherit;
+// }
+// input[type="text"]::-webkit-input-placeholder,
+// input[type="tel"]::-webkit-input-placeholder,
+// input[type="url"]::-webkit-input-placeholder,
+// input[type="email"]::-webkit-input-placeholder { /* WebKit browsers */
+//   color: #999;
+// }
+// input[type="text"]:-moz-placeholder,
+// input[type="tel"]:-moz-placeholder,
+// input[type="url"]:-moz-placeholder,
+// input[type="email"]:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+//   color: #999;
+//   opacity: 1;
+// }
+// input[type="text"]::-moz-placeholder,
+// input[type="tel"]::-moz-placeholder,
+// input[type="url"]::-moz-placeholder,
+// input[type="email"]::-moz-placeholder { /* Mozilla Firefox 19+ */
+//   color: #999;
+//   opacity: 1;
+// }
+// input[type="text"]:-ms-input-placeholder,
+// input[type="tel"]:-ms-input-placeholder,
+// input[type="url"]:-ms-input-placeholder,
+// input[type="email"]:-ms-input-placeholder { /* Internet Explorer 10+ */
+//   color: #999;
+// }
+// input:not(.search-field-input[type="text"]):focus,
+// textarea:not(.search-field-input[type="text"]):focus {
+//   background-color: transparent;
+// }
+// input.form-control:focus,
+// textarea.form-control:focus {
+//   background-color: #fff !important;
+// }
+
+// .medium-insert-buttons ul li+li {
+//   margin-top: 0;
+// }
+
+// td .form-group {
+//   margin-bottom: 0;
+// }
+    input[type="radio"], input[type="checkbox"] {
+    margin: 0px 10px 0px 0px;
+	}
+	label {
+	font-weight: normal;
+	}
+	
+	.layout-block-footer {
+    margin-top: 4rem;
+    text-align: center;
+    }
+	
+	@media (min-width: 768px){
+	.layout-block-footer {
+		margin-top: 5rem;
+	}
+  }
