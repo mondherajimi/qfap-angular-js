@@ -1,0 +1,64 @@
+<div class="modal-header">
+  <button ng-click="$dismiss()" type="button" class="close" aria-label="Fermer">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title">Image</h4>
+</div>
+
+<div class="modal-body" id="image-modal">
+  <div class="row">
+    <div class="col-md-6">
+      <label>Format : </label>
+      <div class="btn-group" role="group" aria-label="format de l'image">
+        <label class="btn btn-sm btn-default"
+               btn-radio="'Large'">Grand<input type="radio" ng-model="data.size" value="Large"></label>
+        <label class="btn btn-sm btn-default"
+               btn-radio="'Medium'">Moyen<input type="radio" ng-model="data.size" value="Medium"></label>
+        <label class="btn btn-sm btn-default" 
+               btn-radio="'Small'">Petit<input type="radio" ng-model="data.size" value="Small"></label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="data.modifiers"
+                 ng-true-value="['full-height']" ng-false-value="null">
+            ne pas contraindre la hauteur
+        </label>
+      </div>
+    </div>	
+    <div class="col-md-6">
+      <label>Alignement : </label>
+      <div class="btn-group" role="group" aria-label="format de l'image">
+        <label class="btn btn-sm btn-default"
+               btn-radio="'gauche'">Gauche<input type="radio" ng-model="data.align" value="left"></label>
+        <label class="btn btn-sm btn-default"
+               btn-radio="'Medium'">Par défaut<input type="radio" ng-model="data.align" value=""></label>
+        <label class="btn btn-sm btn-default" 
+               btn-radio="'Small'">Droite<input type="radio" ng-model="data.align" value="right"></label>
+      </div>
+    </div>	
+    <div class="col-md-6">
+      <div class="alert alert-danger" role="alert" ng-if="loadErrorMsg">
+        <p>{{loadErrorMsg}}</p>
+      </div>
+      <div ng-if="media.pages.length > 0">
+        <p>Cette image apparait dans :</p>
+        <ul>
+          <li ng-repeat="doc in media.pages">{{doc.titre}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="component component-image" ng-class="{'full-height': data.modifiers}">
+    <img ng-src="{{data.src}}" alt="{{data.alt}}"/>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="imageCpnt.replace()">Remplacer</button>
+  <button class="btn btn-primary" ng-click="imageCpnt.update()">Valider</button>
+  <button class="btn btn-danger" ng-click="imageCpnt.delete()">Supprimer</button>
+</div>

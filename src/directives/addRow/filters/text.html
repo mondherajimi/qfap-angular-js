@@ -1,0 +1,5 @@
+<input type="text" name="{{name}}"
+       class="input-filter form-control input-sm"
+       ng-disabled="$filterRow.disabled"
+       ng-model="params.filter()[name]"
+       ph="{{getFilterPlaceholderValue(filter, name)}}"/>

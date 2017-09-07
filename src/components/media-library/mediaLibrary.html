@@ -1,0 +1,426 @@
+<div class="modal-header">
+  <button ng-click="$dismiss()" type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <button type="button" ng-click="mode = 'create'" class="btn btn-default" style="float:right" ng-show="mode !== 'create' && mode !== 'replace' && mode !== 'edit'">
+                Importer une nouvelle image
+  </button>
+  <h3 class="modal-title">Bibliothèque d'images</h4>
+</div>
+
+
+<div ng-show="mode === 'search'">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs nav-justified" role="tablist">
+    <li role="presentation" ng-class="{'active': tab === 'mesimages'}" ng-show="mesimages_auth">
+      <a href role="tab" ng-click="tab = 'mesimages'">Mes images</a>
+    </li>
+    <li role="presentation" ng-class="{'active': tab === 'tout'}" ng-show="tout_auth">
+      <a href role="tab" ng-click="tab = 'tout'">Toutes les images</a>
+    </li>
+    <li role="presentation" ng-class="{'active': tab === 'default'}" ng-show="defaut_auth">
+      <a href role="tab" ng-click="tab = 'default'">Visuels par défaut</a>
+    </li>
+    <li role="presentation" ng-class="{'active': tab === 'mongroupe'}" ng-show="mongroupe_auth">
+      <a href role="tab" ng-click="tab = 'mongroupe'">Mon groupe</a>
+    </li>
+    <li role="presentation" ng-class="{'active': tab === 'phrasea'}" ng-show="tout_auth">
+      <a href role="tab" ng-click="tab = 'phrasea'">Phrasea</a>
+    </li>
+  </ul>
+  
+  
+  <!-- Tab panes -->
+  <div class="tab-content">
+  
+    <div role="tabpanel" class="tab-pane" ng-show="tab === 'mesimages'">
+      <div class="modal-body" id="mesimages-gallery">
+
+         <form class="form-inline" novalidate>
+            <div class="form-group media-search">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" ph="rechercher"
+                     ng-change="fetchMedias()" ng-model="query.keyword">
+              </div>
+            </div>
+          </form>
+
+          <br>
+
+          <div class="thumbnail" ng-repeat="media in medias">
+            <img alt="{{media.alt}}" ng-src="{{media | path: 'Small'}}">  
+            <p>{{media.alt}}</p>
+            <p>{{media.imageWidth}} x {{media.imageHeight}} </p>
+            <div class="btn-group btn-group-justified" role="group" aria-label="contrôles">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default btn-xs" ng-click="edit(media)">
+                  <i class="fa fa-pencil"></i> modifier
+                </button>
+              </div>
+              <div class="btn-group" role="group" ng-if="canInsert">
+                <button type="button" class="btn btn-default btn-xs" ng-click="select(media)">
+                  <i class="fa fa-download"></i> ajouter
+                </button>
+              </div>                
+            </div>
+          </div>
+          <center>
+            <uib-pagination ng-show="totalItems > itemsPerPage" class="pagination-sm" previous-text="<" next-text=">" total-items="totalItems" ng-model="currentPage" ng-change="fetchMedias()" boundary-link-numbers="true" rotate="false" items-per-page="itemsPerPage" max-size="maxSize"></uib-pagination>
+          </center>
+
+          <div class="modal-footer">
+            <div class="alert alert-danger pull-left" role="alert" ng-if="errorMsg">{{errorMsg}}</div>
+
+      </div>
+          </div>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" ng-show="tab === 'tout'">
+      <div class="modal-body" id="media-gallery">
+
+          <form class="form-inline" novalidate>
+            <div class="form-group media-search">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" ph="rechercher"
+                     ng-change="fetchMedias()" ng-model="query.keyword">
+              </div>
+            </div>
+          </form>
+          
+          <br>
+
+          <div class="thumbnail" ng-repeat="media in medias">
+         	<img alt="{{media.alt}}" ng-src="{{media | path: 'Small'}}">          
+            <p>{{media.alt}}</p>
+            <p>{{media.imageWidth}} x {{media.imageHeight}} </p>
+            <div class="btn-group btn-group-justified" role="group" aria-label="contrôles">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default btn-xs" ng-click="edit(media)" ng-disabled="media.pages.length || (currentUser.isContributor() && mediaToEdit.createdBy!=uid) 
+            || (currentUser.isModerator() && mediaToEdit.idGroupes!=user_group)">
+                  <i class="fa fa-pencil"></i> modifier
+                </button>
+              </div>
+              <div class="btn-group" role="group" ng-if="canInsert">
+                <button type="button" class="btn btn-default btn-xs" ng-click="select(media)">
+                  <i class="fa fa-download"></i> ajouter
+                </button>
+              </div>                
+            </div>
+          </div>
+          <center>
+            <uib-pagination ng-show="totalItems > itemsPerPage" class="pagination-sm" previous-text="<" next-text=">" total-items="totalItems" ng-model="currentPage" ng-change="fetchMedias()" boundary-link-numbers="true" rotate="false" items-per-page="itemsPerPage" max-size="maxSize"></uib-pagination>
+          </center>
+
+          <div class="modal-footer">
+          </div>
+
+      </div>
+    </div>
+    
+    <div role="tabpanel" class="tab-pane" ng-show="tab === 'default'">
+      <div class="modal-body" id="media-gallery">
+
+          <form class="form-inline" novalidate>
+            <div class="form-group media-search">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" ph="rechercher"
+                     ng-change="fetchMedias()" ng-model="query.keyword">
+              </div>
+            </div>
+          </form>
+          
+          <br>
+
+          <div class="thumbnail" ng-repeat="media in medias">
+          	<img alt="{{media.alt}}" ng-src="{{media | path: 'Small'}}">          
+            <p>{{media.alt}}</p>
+            <p>{{media.imageWidth}} x {{media.imageHeight}} </p>
+            <div class="btn-group btn-group-justified" role="group" aria-label="contrôles">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default btn-xs" ng-click="edit(media)">
+                  <i class="fa fa-pencil"></i> modifier
+                </button>
+              </div>
+              <div class="btn-group" role="group" ng-if="canInsert">
+                <button type="button" class="btn btn-default btn-xs" ng-click="select(media)">
+                  <i class="fa fa-download"></i> ajouter
+                </button>
+              </div>              
+            </div>
+          </div>
+          <center>
+            <uib-pagination ng-show="totalItems > itemsPerPage" class="pagination-sm" previous-text="<" next-text=">" total-items="totalItems" ng-model="currentPage" ng-change="fetchMedias()" boundary-link-numbers="true" rotate="false" items-per-page="itemsPerPage" max-size="maxSize"></uib-pagination>
+          </center>
+
+          <div class="modal-footer">
+          </div>
+
+      </div>
+     </div>
+    
+    <div role="tabpanel" class="tab-pane" ng-show="tab === 'mongroupe'">
+      <div class="modal-body" id="media-gallery">
+
+          <form class="form-inline" novalidate>
+            <div class="form-group media-search">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" ph="rechercher"
+                     ng-change="fetchMedias()" ng-model="query.keyword">
+              </div>
+            </div>
+          </form>
+          
+          <br>
+
+          <div class="thumbnail" ng-repeat="media in medias">
+          	<img alt="{{media.alt}}" ng-src="{{media | path: 'Small'}}">
+            <p>{{media.alt}}</p>
+            <p>{{media.imageWidth}} x {{media.imageHeight}} </p>
+            <div class="btn-group btn-group-justified" role="group" aria-label="contrôles">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default btn-xs" ng-click="edit(media)">
+                  <i class="fa fa-pencil"></i> modifier
+                </button>
+              </div>
+              <div class="btn-group" role="group" ng-if="canInsert">
+                <button type="button" class="btn btn-default btn-xs" ng-click="select(media)">
+                  <i class="fa fa-download"></i> ajouter
+                </button>
+              </div>               
+            </div>
+          </div>
+          <center>
+            <uib-pagination ng-show="totalItems > itemsPerPage" class="pagination-sm" previous-text="<" next-text=">" total-items="totalItems" ng-model="currentPage" ng-change="fetchMedias()" boundary-link-numbers="true" rotate="false" items-per-page="itemsPerPage" max-size="maxSize"></uib-pagination>
+          </center>
+
+          <div class="modal-footer">
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+<div ng-show="mode === 'create'">
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-5">
+        <button class="btn btn-primary" ngf-select multiple
+                ngf-change="updatePreview($files, $event)" ngf-max-size="15728640"
+                ngf-accept="'image/jpeg,image/png,image/gif,video/mp4,video/ogg,video/webm'">
+          <span class="glyphicon glyphicon glyphicon-upload" aria-hidden="true"></span> choisir un fichier présent sur votre poste
+        </button>
+      </div>
+      <div class="col-md-7">
+        <div class="alert alert-danger" role="alert" ng-show="uploadErrorMsg">
+          <p>
+            <strong>Impossible de télécharger ce fichier :</strong>
+            <ul>
+              <li>soit la taille de votre média dépasse la limite autorisée : <strong>15Mo</strong></li>
+              <li>soit ce n'est ni une <strong>image</strong> (.jpeg, .jpg, .png, .gif), ni une <strong>video</strong> (.mp4,. ogv, .webm)</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+    
+
+    <form class="row" name="uploadForm" ng-show="mediaToUpload.files">
+    <div class="row" ng-repeat="mediaToUpload in mediaToUpload.files">
+      <div class="col-md-6 upload-preview">
+        <img class="img-responsive" alt="{{mediaToUpload.alt}}"
+             ng-src="{{mediaToUpload.src}}"
+             ng-if="mediaToUpload.mimeType === 'image/jpeg' || mediaToUpload.mimeType === 'image/png' || mediaToUpload.mimeType === 'image/gif'"/>
+        <h2 class="text-center"
+            ng-if="mediaToUpload.mimeType === 'video/mp4' ||mediaToUpload.mimeType === 'video/ogg' || mediaToUpload.mimeType === 'video/webm'">
+          <i class="icon-play"></i>
+        </h2>
+      </div>
+      <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{infobullesCredits}}" tooltip-placement="left" style="margin-top:0" tooltip-trigger="outsideClick" ng-if="infobullesCredits"></i>
+      <div class="col-md-6">
+        <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{infobullesCredits}}" tooltip-placement="left" style="margin-top:0" tooltip-trigger="outsideClick" ng-if="infobullesCredits"></i>        
+        <div class="form-group">
+          <label>Crédits<sup>*</sup></label>
+          <input type="text" class="form-control" placeholder="crédit" onfocus="this.placeholder = ''" onblur="this.placeholder = 'crédit'" ng-model="mediaToUpload.credit" required>
+        </div>      
+        <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{infobullesAlt}}" tooltip-placement="left" style="margin-top:0" tooltip-trigger="outsideClick" ng-if="infobullesAlt"></i>        
+        <div class="form-group">
+          <label>Légende<sup>*</sup></label>
+          <input type="text" class="form-control" placeholder="alt" onfocus="this.placeholder = ''" onblur="this.placeholder = 'alt'" ng-model="mediaToUpload.alt" required>
+        </div>
+        <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="6{{infobullesKeywords}}" tooltip-placement="left" style="margin-top:0" tooltip-trigger="outsideClick" ng-if="infobullesKeywords"></i>                
+        <div class="form-group">
+          <label>Mots clés</label>
+          <tags-input ng-model="mediaToUpload.keywords" placeholder="mots clés"></tags-input>
+          <!--<input type="text" class="form-control" placeholder="mots clés" onfocus="this.placeholder = ''" onblur="this.placeholder = 'mots clés'" ng-model="mediaToUpload.keywords" required>-->
+        </div>
+      </div>
+    </div>  
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="alert alert-danger pull-left" role="alert" ng-if="errorMsg">{{errorMsg}}</div>
+    <button type="button" class="btn btn-default" ng-click="mode = 'search'" >
+      Retour à la recherche
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="upload()"
+            ng-if="mediaToUpload.files" ng-disabled="uploadForm.$invalid || errorMsg">
+      Télécharger
+    </button>
+  </div>
+  
+</div>
+
+
+<div ng-show="mode === 'edit'">
+
+  <div class="modal-body">
+
+    <form class="row" name="editForm">
+    
+
+    
+      <div class="col-md-6 upload-preview">
+        <img class="img-responsive" alt="{{mediaToEdit.alt}}"
+             ng-src="{{mediaToEdit | path: 'Small'}}"
+             ng-if="mediaToEdit.mimeType === 'image/jpeg' || mediaToEdit.mimeType === 'image/png' || mediaToEdit.mimeType === 'image/gif'"/>
+      </div>
+      <div class="col-md-6">
+	    <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{infobullesCredits}}" tooltip-placement="left" style="margin-top:0" tooltip-trigger="outsideClick" ng-if="infobullesCredits"></i>  
+        <div class="form-group">
+          <label>Crédits<sup>*</sup></label>
+          <input type="text" class="form-control" placeholder="crédit" onfocus="this.placeholder = ''" onblur="this.placeholder = 'crédit'" ng-model="mediaToEdit.credit" required>
+        </div>
+        <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{infobullesAlt}}" tooltip-placement="left" style="margin-top:0" tooltip-trigger="outsideClick" ng-if="infobullesAlt"></i>                       
+        <div class="form-group">
+          <label>Légende<sup>*</sup></label>
+          <input type="text" class="form-control" placeholder="alt" onfocus="this.placeholder = ''" onblur="this.placeholder = 'alt'" ng-model="mediaToEdit.alt" required>
+        </div>
+        <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{infobullesKeywords}}" tooltip-placement="left" style="margin-top:0" tooltip-trigger="outsideClick" ng-if="infobullesKeywords"></i>                
+        <div class="form-group">
+          <label>Mots clés</label>
+          <tags-input ng-model="mediaToEdit.keywords" placeholder="mots clés"></tags-input>
+        </div>
+        
+        <p>Ajouté le {{mediaToEdit.createdAt | dateFormat}} par {{mediaToEdit.createdBy | getFullName}}</p>
+        <p>Modifié le {{mediaToEdit.updatedAt | dateFormat}} par {{mediaToEdit.updatedBy | getFullName}}</p>
+        <p>Poids du fichier : {{mediaToEdit.size | formatSize}}</p>
+        <p>URL du fichier : <a href="{{mediaToEdit |path}}" target="_blank">{{mediaToEdit |path}}</a></p>
+        <p>Taille de l'image : {{mediaToEdit.imageWidth}}x{{mediaToEdit.imageHeight}}px</p>
+      
+    	</div>  
+      <div class="col-md-6"ng-show="mediaToEdit.pages.length">
+    		<h5>Utilisé dans</h5>
+    			<ul class="list-unstyled">
+    				<li ng-repeat="page in mediaToEdit.pages">
+    					 <a href="#/fiche/edit/{{page.id}}">{{page.title}}</a>
+    				</li>
+    			</ul>
+    	</div>
+    </form>
+    
+
+  </div>
+  <div class="modal-footer">
+    <div class="alert alert-danger pull-left" role="alert" ng-if="errorMsg">{{errorMsg}}</div>
+    <button type="button" class="btn btn-default"
+            ng-click="mode = 'search'">Retour à la recherche</button>
+    <button type="button" ng-click="mode = 'replace'" class="btn btn-default">
+      <i class="fa fa-refresh"></i> Remplacer
+    </button>
+    <button type="button" class="btn btn-danger" ng-click="remove(mediaToEdit)"
+            ng-disabled="mediaToEdit.pages.length || (currentUser.isContributor() && mediaToEdit.createdBy!=uid) 
+            || (currentUser.isModerator() && mediaToEdit.idGroupes!=user_group)">
+      <i class="fa fa-trash"></i> Supprimer
+    </button>
+    <button type="button" class="btn btn-primary"
+            ng-click="update()" ng-disabled="editForm.$invalid">
+      <i class="fa fa-pencil"></i> Modifier
+    </button>
+  </div>
+  
+</div>
+
+<div ng-show="mode === 'replace'">
+replace
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-5">
+        <button class="btn btn-primary" ngf-select
+                ngf-change="updatePreview($files, $event)" ngf-max-size="15728640"
+                ngf-accept="'image/jpeg,image/png,image/gif,video/mp4,video/ogg,video/webm'">
+          <span class="glyphicon glyphicon glyphicon-upload" aria-hidden="true"></span> choisir un fichier
+        </button>
+      </div>
+      <div class="col-md-7">
+        <div class="alert alert-danger" role="alert" ng-show="uploadErrorMsg">
+          <p>
+            <strong>Impossible de télécharger ce fichier :</strong>
+            <ul>
+              <li>soit la taille de votre média dépasse la limite autorisée : <strong>15Mo</strong></li>
+              <li>soit ce n'est ni un <strong>fichier pdf</strong>, ni une <strong>image</strong> (.jpeg, .jpg, .png, .gif), ni une <strong>video</strong> (.mp4,. ogv, .webm)</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+    <form name="uploadForm" ng-show="mediaToUpload.files">
+      <div class="row" ng-repeat="file in mediaToUpload.files">
+        <hr>
+        <div class="col-md-6 upload-preview">
+          <img class="img-responsive" title="{{file.title}}" alt="{{file.alt}}"
+               ng-src="{{file.src}}"
+               ng-if="file.mimeType === 'image/jpeg' || file.mimeType === 'image/png' || file.mimeType === 'image/gif'"/>
+          <h2 class="text-center"
+              ng-if="file.mimeType === 'video/mp4' || file.mimeType === 'video/ogg' || file.mimeType === 'video/webm'">
+            <i class="icon-play"></i>
+          </h2>
+        </div>
+        <div class="col-md-6">
+        <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{infobullesCredits}}" tooltip-placement="left" style="margin-top:0" tooltip-trigger="outsideClick" ng-if="infobullesCredits"></i>                
+        <div class="form-group">
+          <label>Crédits<sup>*</sup></label>
+          <input type="text" class="form-control" placeholder="crédit" onfocus="this.placeholder = ''" onblur="this.placeholder = 'crédit'" ng-model="file.credit" required>
+        </div> 
+        <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{infobullesAlt}}" tooltip-placement="left" style="margin-top:0" tooltip-trigger="outsideClick" ng-if="infobullesAlt"></i>                               
+        <div class="form-group">
+          <label>Légende<sup>*</sup></label>
+          <input type="text" class="form-control" placeholder="alt" onfocus="this.placeholder = ''" onblur="this.placeholder = 'alt'" ng-model="file.alt" required>
+        </div>
+        <i class="fa fa-info-circle pull-right" aria-hidden="true" uib-tooltip="{{infobullesKeywords}}" tooltip-placement="left" style="margin-top:0" tooltip-trigger="outsideClick" ng-if="infobullesKeywords"></i>                
+        <div class="form-group">
+          <label>Mots clés</label>
+          <tags-input ng-model="file.keywords" placeholder="mots clés"></tags-input>
+          <!--<input type="text" class="form-control" placeholder="mots clés" onfocus="this.placeholder = ''" onblur="this.placeholder = 'mots clés'" ng-model="mediaToUpload.keywords" required>-->
+        </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="alert alert-danger pull-left" role="alert" ng-if="errorMsg">{{errorMsg}}</div>
+
+    <button type="button" class="btn btn-default" ng-click="mode = 'search'" >
+      Retour à la recherche
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="upload()"
+            ng-if="mediaToUpload.files" ng-disabled="uploadForm.$invalid || errorMsg">
+      Télécharger
+    </button>
+  </div>
+</div>
+
+
+

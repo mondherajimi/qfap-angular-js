@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <button type="button" class="close" aria-label="Fermer" ng-click="$dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h3 class="modal-title">{{ modal.params.title }}</h3>
+</div>
+
+<div class="modal-body">
+  <div ng-bind-html="modal.params.text"></div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary"
+          ng-click="$dismiss()">
+    Annuler
+  </button>
+  <button type="button" class="btn btn-danger"
+          ng-click="$close()">
+    Confirmer
+  </button>
+</div>

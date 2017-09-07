@@ -1,0 +1,58 @@
+<div class="modal-header">
+  <button ng-click="$dismiss()" type="button" class="close" aria-label="Fermer">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h3 class="modal-title">Quiz</h3>
+</div>
+
+<div class="modal-body" id="quiz-modal" ng-form="quizForm">
+
+<div class="component component-quiz">
+    <form class="component-quiz-form" action="#" method="POST">
+        <ul class="component-quiz-items">
+            <li id="$index" name="$index" class="component-quiz-item" ng-repeat="item in quizCpnt.data.items track by $index">
+			
+							<!--<div class="component-quiz-edit-buttons btn-group-vertical" role="group" aria-label="édition du composant">
+      <button class="btn btn-danger btn-xs" ng-click="quizCpnt.deleteItem($index)">
+        <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
+        <span class="sr-only">Annuler</span>
+      </button>
+    </div>-->
+	 
+	<button ng-click="quizCpnt.deleteItem($index)" type="button" class="close" aria-label="Supprimer">
+    <span class="component-quiz-edit-buttons" aria-hidden="true">×</span>
+  </button>
+   
+	
+                <div id="quiz-title{{$index}}" class="component-quiz-title">Question {{$index+1}}</div>			
+                <div class="component-quiz-text"><input type="text" class="form-control" ph="mettre ici une question" ng-model="item.text" required></div>
+                <div class="component-quiz-options">
+                    <label class="component-quiz-option">
+                        <input type="radio" name="input_0" value="1"><input type="text" class="form-control" ph="proposer ici une reponse" ng-model="item.options[0].label" required></label>
+                    <label class="component-quiz-option">
+                        <input type="radio" name="input_0" value="2"><input type="text" class="form-control" ph="proposer ici une reponse" ng-model="item.options[1].label" required></label>
+                    
+					<label id="thirdOpt{{$index}}" class="component-quiz-option-hided" style="display: none;">
+                        <input type="radio" name="input_0" value="3"><input type="text" class="form-control" ph="proposer ici une reponse" ng-model="item.options[2].label"></label>					
+					<label id="FourthOpt{{$index}}" class="component-quiz-option-hided" style="display: none;">
+                        <input type="radio" name="input_0" value="4"><input type="text" class="form-control" ph="proposer ici une reponse" ng-model="item.options[3].label"></label>
+                    <label id="FifthOpt{{$index}}" class="component-quiz-option-hided" style="display: none;">
+                        <input type="radio" name="input_0" value="5"><input type="text" class="form-control" ph="proposer ici une reponse" ng-model="item.options[4].label"></label>
+						
+                    <span id="addOpt{{$index}}" ng-click="quizCpnt.addOpt($index)"><i class="fa fa-plus-square-o" style="font-size:24px" aria-hidden="true"></i><span>Ajouter un choix</span></span>
+                </div>
+					
+
+            </li>
+        </ul>
+    </form>
+</div>
+
+  <span ng-click="quizCpnt.addItem()"><i class="fa fa-plus-square-o" style="font-size:24px" aria-hidden="true"></i><span>Ajouter une question</span></span>
+
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-danger" ng-if="quizCpnt.showDelete" ng-click="quizCpnt.delete()">Supprimer</button>
+  <button class="btn btn-primary" ng-disabled="quizForm.$invalid" ng-click="quizCpnt.update()">Valider</button>
+</div>

@@ -1,0 +1,9 @@
+<div class="controls btn-group" role="group" contenteditable="false"
+     ng-class="config.position">
+  <button type="button" class="btn btn-xs" uib-tooltip="{{button.label}}"
+          ng-click="triggerAction(button.action)" ng-class="button.class"
+          ng-repeat="button in config.buttons" >
+    <i aria-hidden="true" class="fa" ng-class="button.icon"></i>
+    <span class="sr-only">{{button.label}}</span>
+  </button>
+</div>

@@ -1,0 +1,195 @@
+<div class="modal-header ng-scope">
+  <button type="button" class="close" aria-label="Fermer" ng-click="$dismiss()">
+    <span aria-hidden="true">×</span>
+  </button>
+  <h3 class="modal-title">Adresse de Parisien</h3>
+</div>
+
+<div
+  class="modal-body ng-pristine ng-scope ng-invalid ng-invalid-required ng-valid-maxlength"
+  ng-form="parisianForm"
+>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group" show-errors="">
+        <input
+          type="number"
+          class="form-control"
+          id="place-parisien-listOrder"
+          name="listOrder"
+          maxlength="30"
+          ng-model="placeParisienCpnt.data.number"
+          ph="Numéro"
+          required=""
+          integer
+          min="1"
+          placeholder="Numéro"
+          aria-invalid="true"
+        >
+      </div>
+      <div class="form-group" show-errors="">
+        <input
+          type="text"
+          class="form-control"
+          id="place-parisien-title"
+          name="title"
+          maxlength="30"
+          ng-model="placeParisienCpnt.data.title"
+          ph="Titre"
+          required=""
+          placeholder="Titre"
+          aria-invalid="true"
+        >
+      </div>
+
+      <div class="form-group input-count" show-errors="">
+        <textarea
+          class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength"
+          rows="4"
+          id="place-parisien-text"
+          name="text"
+          ng-model="placeParisienCpnt.data.text"
+          maxlength="{{ placeParisienCpnt.maxLength }}"
+          ph="Texte"
+          required=""
+          placeholder=""
+          aria-invalid="true"
+        ></textarea>
+        <span
+          class="character-count ng-binding"
+          ng-class="{'text-danger': placeParisienCpnt.data.text.length >= placeParisienCpnt.maxLength}"
+        >
+          {{placeParisienCpnt.maxLength - placeParisienCpnt.data.text.length}}
+        </span>
+      </div>
+
+      <legend>Lieu</legend>
+      <div class="form-group" show-errors="">
+        <input
+          type="hidden"
+          id="isInPlaces"
+          name="isInPlaces"
+          ng-value="placeParisienCpnt.data.place.isInPlaces"
+        >
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          id="place-parisien-name"
+          required=""
+          ph="Nom du Lieu"
+          placeholder="Nom du Lieu"
+          aria-invalid="true"
+          ng-model="placeParisienCpnt.data.place.current"
+          uib-typeahead="item as item.formatted for item in placeParisienCpnt.getLocation($viewValue)"
+          typeahead-input-formatter="placeParisienCpnt.formatLabel($model)"
+          typeahead-on-select="placeParisienCpnt.onSelect($item, $model, $label)"
+          ng-change="placeParisienCpnt.onChange()"
+        >
+      </div>
+
+      <div class="form-group" show-errors="">
+        <input
+          type="text"
+          name="address"
+          maxlength="30"
+          required=""
+          ng-model="placeParisienCpnt.data.place.current.address"
+          ng-disabled="placeParisienCpnt.data.place.isInPlaces"
+          placeholder="Adresse"
+          class="form-control"
+          aria-invalid="true"
+        >
+      </div>
+
+      <div class="form-group" show-errors="">
+        <input
+          type="text"
+          class="form-control"
+          id="place-parisien-zipCode"
+          name="zipCode"
+          maxlength="30"
+          ng-model="placeParisienCpnt.data.place.current.zipCode"
+          ng-disabled="placeParisienCpnt.data.place.isInPlaces"
+          ph="Code postal"
+          required=""
+          placeholder="Code postal"
+          aria-invalid="true"
+        >
+      </div>
+
+      <div class="form-group" show-errors="">
+        <input
+          type="text"
+          class="form-control"
+          id="place-parisien-city"
+          name="city"
+          maxlength="30"
+          ng-model="placeParisienCpnt.data.place.current.city"
+          ng-disabled="placeParisienCpnt.data.place.isInPlaces"
+          ph="Ville"
+          required=""
+          placeholder="Ville"
+          aria-invalid="true"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="isVisibleOnMap" class="col-sm-5">Afficher sur la carte</label>
+        <div class="btn-group">
+          <label
+            class="btn btn-xs btn-default"
+            ng-model="placeParisienCpnt.data.place.isVisibleOnMap"
+            ng-class="{'btn-primary': placeParisienCpnt.data.place.isVisibleOnMap === true}"
+            uib-btn-radio="true"
+          >
+            Oui
+          </label>
+          <label
+            class="btn btn-xs btn-default"
+            ng-model="placeParisienCpnt.data.place.isVisibleOnMap"
+            ng-class="{'btn-primary': placeParisienCpnt.data.place.isVisibleOnMap === false}"
+            uib-btn-radio="false"
+          >
+            Non
+          </label>
+        </div>
+      </div>
+      <div class="form-group" show-errors="">
+        <select
+          class="form-control"
+          id="place-parisien-category"
+          name="category"
+          ng-model="placeParisienCpnt.data.category"
+          ng-options="category as category.title for category in placeParisienCpnt.categories track by category.id"
+          required=""
+          aria-invalid="true"
+        >
+          <option value="">Légende</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer ng-scope">
+  <!-- ngIf: placeParisienCpnt.showDelete -->
+  <button
+    class="btn btn-danger"
+    ng-if="placeParisienCpnt.showDelete"
+    ng-click="placeParisienCpnt.delete()"
+  >
+    Supprimer
+  </button>
+
+  <button
+    class="btn btn-primary"
+    ng-click="placeParisienCpnt.updateParisianPlace()"
+    ng-disabled="parisianForm.$invalid ||&nbsp;(placeParisienCpnt.maxLength - placeParisienCpnt.data.quote.length < 0)"
+    disabled="disabled"
+  >
+    Valider
+  </button>
+</div>

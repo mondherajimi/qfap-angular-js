@@ -1,0 +1,38 @@
+<div class="modal-header">
+  <button type="button" class="close" aria-label="Fermer" ng-click="$dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h3 class="modal-title">{{ modal.params.title }}</h3>
+</div>
+
+<div class="modal-body">
+  <h4 ng-bind-html="modal.params.text"></h4>
+<!--   <div>
+    <label>
+      <input type="checkbox" ng-model="message" value="0" ng-value="0"/> Aucun
+    </label>
+  </div> -->
+  <div ng-repeat="message in modal.params.messages">
+    <label >
+      <input type="checkbox" ng-model="modal.params.messages.selected[message.id]" ng-value="message"  value="message.id"/> {{message.title}}
+      <br/><small style="font-weight:normal">{{message.text}}</small>
+    </label>
+  </div>
+  <div>
+    <label>
+      <input type="checkbox" ng-model="personnalise" /> Message personnalisé
+    </label>
+    <br/><textarea rows="3" cols="80" ng-model="modal.params.messagepersonnalise" name="messagepersonnalise" ng-if="personnalise"></textarea>
+  </div>
+</div>
+{{modal.params.messages.selected}}
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary"
+          ng-click="$dismiss()">
+    Non
+  </button>
+  <button type="button" class="btn btn-danger"
+          ng-click="$close(modal.params)">
+    Envoyer
+  </button>
+</div>

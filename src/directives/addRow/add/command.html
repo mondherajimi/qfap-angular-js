@@ -1,0 +1,13 @@
+<div class="cell-command">
+  <button class="btn btn-xs btn-link"
+          ng-disabled="addForm.$invalid"
+          ng-click="params.settings().addData(params)"
+          uib-tooltip="Ajouter">
+    <i class="fa fa-floppy-o"></i>
+  </button>
+  <button class="btn btn-xs btn-link"
+          ng-click="params.parameters({ addRow: undefined });"
+          uib-tooltip="Annuler">
+    <i class="fa fa-times"></i>
+  </button>
+</div>

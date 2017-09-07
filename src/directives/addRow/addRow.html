@@ -1,0 +1,14 @@
+<tr ng-if="params.parameters().addRow" class="ng-table-add" ng-form="addForm">
+  <th data-title-text="{{$column.titleAlt(this) || $column.title(this)}}"
+      ng-repeat="$column in $columns"
+      ng-if="$column.show(this)"
+      class="add {{$column.class(this)}}">
+    <div class="add-cell"
+         ng-if="$column.dataType !== 'readonly'"
+         ng-include="'ng-table/add/' + $column.dataType + '.html'">
+    </div>
+    <span ng-if="$column.dataType === 'readonly'">
+      {{params.parameters().addRow[$column.field]}}
+    </span>
+  </th>
+</tr>

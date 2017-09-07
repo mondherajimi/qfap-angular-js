@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <button type="button" class="close" aria-label="Fermer" ng-click="$dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h3 class="modal-title">Encadré</h3>
+</div>
+
+<div class="modal-body" ng-form="highlightForm">
+  <div class="form-group" show-errors>
+    <input type="text" class="form-control" name="title"
+           ph="Titre de l'encadré" ng-model="highlightCpnt.getSetTitle"
+           ng-model-options="{ getterSetter: true }">
+  </div>
+  <div class="form-group">
+    <basic-editor class="form-control" ng-model="highlightCpnt.data.text" config="highlightCpnt.editorConfig"></basic-editor>
+  </div>
+
+  <hr>
+  <preview data="highlightCpnt.data" type="highlightCpnt.type"></preview>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-danger" ng-if="showDelete" ng-click="highlightCpnt.delete()">Supprimer</button>
+  <button class="btn btn-primary" ng-click="highlightCpnt.update()">Valider</button>
+</div>
+

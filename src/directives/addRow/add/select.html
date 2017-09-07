@@ -1,0 +1,5 @@
+<select class="form-control input-sm" name="{{$column.field}}"
+        ng-model="params.parameters().addRow[$column.field]"
+        ng-options="data.id as data.title for data in $column.selectData"
+        ng-required="$column.required">
+</select>

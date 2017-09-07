@@ -1,0 +1,222 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle"
+              ng-click="header.navCollapsed = !header.navCollapsed"
+              aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Basculer la navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" ui-sref="dashboard">
+        <img ng-src="{{header.logo}}" alt="QueFaire Pro">
+      </a>
+    </div>
+
+    <div class="navbar-collapse"
+         ng-if="header.currentUser.isAuthenticated()"
+         uib-collapse="header.navCollapsed">
+      <ul class="nav navbar-nav">
+
+        <li ng-if="header.currentUser.isUser()" class="navbar-nav-howto">
+          <!--<a ng-href="{{header.helpLink}}" target="_blank">Comment ça marche ?<span></span></a>-->
+		  <!-- comment ca marche -->
+		  <a style="cursor:pointer" ng-click="affichage()">Comment ça marche ?<span></span></a>
+<div class="guide-modal" ng-show="visible">
+    <div class="guide-modal-wrapper">
+      <div class="guide-modal-items">
+      <div class="guide-modal-item">
+        <ul class="guide-modal-list">
+          <li>
+            <span class="circle">1</span>
+            <p>
+              <span class="icon icon1"></span>
+              Vous avez une idée de sortie </p>
+          </li>
+          <li>
+            <span class="circle">2</span>
+            <p>
+              <span class="icon icon2"></span>
+              Elle n’est pas déjà
+dans le site</p>
+          </li>
+          <li>
+            <span class="circle">3</span>
+            <p>
+              <span class="icon icon3"></span>
+              Rédigez une fiche</p>
+          </li>
+        </ul>
+        </div>
+      <div class="guide-modal-item">
+        <ul class="guide-modal-list">
+          <li>
+            <span class="circle">4</span>
+            <p>
+              <span class="icon icon4"></span>
+              Nous relisons</p>
+          </li>
+          <li>
+            <span class="circle">5</span>
+            <p>
+              <span class="icon icon5"></span>
+              Nous validons
+et publions</p>
+          </li>
+          <li>
+            <span class="circle">6</span>
+            <p>
+              <span class="icon icon6"></span>
+              Nous vous informons</p>
+          </li>
+        </ul>
+        </div>
+      <div class="guide-modal-item">
+        <ul class="guide-modal-list">
+          <li>
+            <span class="circle">7</span>
+            <div class="wrap-social">
+              <span class="icon2 icon7"></span><p class="social-item">Partagez</p>
+            </div>
+            <div class="wrap-social">
+              <span class="icon2 icon8"></span><p class="social-item">Diffusez</p>
+            </div>
+            <div class="wrap-social">
+              <span class="icon2 icon9"></span><p class="social-item">Likez</p>
+            </div>
+          </li>
+          <li>
+          </li>
+        </ul>
+        </div>
+    </div>  
+    </div>
+  </div>
+  <!-- comment ca marche -->
+        </li>
+
+        <li ng-if="header.currentUser.hasAccess(header.USER_ACCESS.contributor)">
+          <a href="" ng-click="header.openMediaLib($event, this)">
+            <i class="fa fa-lg fa-picture-o"></i>
+            <span ng-class="{
+              'hidden-sm': header.currentUser.hasAccess(header.USER_ACCESS.moderator),
+              'hidden-md': header.currentUser.hasAccess(header.USER_ACCESS.redactor)
+            }">
+              Bibliothèque d'image
+            </span>
+          </a>
+        </li>
+
+        <li role="separator" class="divider"
+            ng-if="header.currentUser.isModerator()">
+        </li>
+
+        <li ng-if="header.currentUser.isModerator()">
+          <a ui-sref="users">
+            <i class="fa fa-lg fa-users"></i>
+            <span class="hidden-sm">Gestion des contributeurs</span>
+          </a>
+        </li>
+
+        <li role="separator" class="divider"
+            ng-if="header.currentUser.hasAccess(header.USER_ACCESS.redactor)">
+        </li>
+
+        <li ng-if="header.currentUser.hasAccess(header.USER_ACCESS.redactor)" uib-dropdown>
+          <a href="" uib-dropdown-toggle>
+            <i class="fa fa-lg fa-pencil"></i>
+            <span class="hidden-sm hidden-md">Rédaction</span>
+            <span class="caret"></span>
+          </a>
+          <ul uib-dropdown-menu role="menu">
+            <li><a ui-sref="fiches({type:1})" ui-sref-opts="{reload: true}">Evènement</a></li>
+            <li><a ui-sref="fiches({type:3})" ui-sref-opts="{reload: true}">Programme</a></li>
+            <li><a ui-sref="fiches({type:2})" ui-sref-opts="{reload: true}">Activité</a></li>
+            <li><a ui-sref="article({id:null})" ui-sref-opts="{reload: true}">Article</a></li>
+          </ul>
+        </li>
+
+        <li role="separator" class="divider"
+            ng-if="header.currentUser.hasAccess(header.USER_ACCESS.redactor)">
+        </li>
+
+        <li ng-if="header.currentUser.hasAccess(header.USER_ACCESS.redactor)">
+          <a href="">
+            <i class="fa fa-lg fa-download"></i>
+            <span class="hidden-sm hidden-md">Import / Export</span>
+          </a>
+        </li>
+
+        <li role="separator" class="divider"
+            ng-if="header.currentUser.hasAccess(header.USER_ACCESS.redactor)">
+        </li>
+
+        <li ng-if="header.currentUser.hasAccess(header.USER_ACCESS.redactor)" uib-dropdown>
+          <a href="" uib-dropdown-toggle>
+            <i class="fa fa-lg fa-cog"></i>
+            <span class="hidden-sm hidden-md">Gestion</span>
+            <span class="caret"></span>
+          </a>
+          <ul uib-dropdown-menu role="menu">
+            <li><a href="#">Urls courtes</a></li>
+            <li ng-if="header.currentUser.isAdmin()"><a ui-sref="disciplines">Disciplines</a></li>
+            <li ng-if="header.currentUser.isAdmin()"><a ui-sref="tags">Tags</a></li>
+            <li><a href="#">Cartes</a></li>
+            <li><a ui-sref="quizzes">Questionnaires</a></li>
+            <li><a ui-sref="users">Utilisateurs</a></li>
+            <li><a ui-sref="authors">Auteurs</a></li>
+            <li><a ui-sref="places">Lieux</a></li>
+
+            <li role="separator" class="divider"></li>
+            <li><a ui-sref="messagesmoderation">Messages de modération</a></li>
+            <li><a ui-sref="messagesbureaux">Messages des bureaux</a></li>
+
+            <li role="separator" class="divider" ng-if="header.currentUser.isAdmin()"></li>
+            <li ng-if="header.currentUser.isAdmin()"><a href="#">Paris.fr</a></li>
+          </ul>
+        </li>
+
+        <li role="separator" class="divider"
+            ng-if="header.currentUser.isAdmin()">
+        </li>
+
+        <li ng-if="header.currentUser.isAdmin()" uib-dropdown>
+          <a href="" uib-dropdown-toggle>
+            <i class="fa fa-lg fa-empire"></i>
+            <span class="hidden-sm hidden-md">Homes</span>
+            <span class="caret"></span>
+          </a>
+          <ul uib-dropdown-menu role="menu">
+            <li><a href="#">Home principale</a></li>
+            <li><a href="#">Expos</a></li>
+            <li><a href="#">Enfants</a></li>
+            <li><a href="#">Sport</a></li>
+            <li><a href="#">Concert</a></li>
+            <li><a href="#">Nuits</a></li>
+            <li><a href="#">Magazine</a></li>
+            <li><a href="#">Univers événementiels</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-if="header.currentUser.hasAccess(header.USER_ACCESS.all)" uib-dropdown>
+          <a href="" uib-dropdown-toggle>
+            <i class="fa fa-lg fa-user"></i>
+            <span class="hidden-sm hidden-md">Mon compte</span>
+            <span class="caret"></span>
+          </a>
+          <ul uib-dropdown-menu role="menu">
+            <li><a href="">{{header.currentUser.getFullName()}}</a></li>
+            <!-- <li><a href="">Mon compte</a></li> -->
+            <li><a href="">Mes coups de coeurs</a></li>
+            <li><a href="" ng-click="header.logout()">Déconnexion</a></li>
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>

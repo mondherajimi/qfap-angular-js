@@ -1,0 +1,48 @@
+<div class="modal-header">
+  <button type="button" class="close" aria-label="Fermer" ng-click="$dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h3 class="modal-title">Lieu</h3>
+</div>
+
+<div class="modal-body" ng-form="placesForm">
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <i class="fa" ng-class="placeCpnt.events.searching ? 'fa-spinner fa-pulse' : 'fa-search'"></i>
+      </span>
+      <input type="text" class="form-control" name="keyword"
+             ph="rechercher sur le nom, l'adresse ou le code postal (3 caractères minium)"
+             ng-model="placeCpnt.getSetKeyword"
+             ng-model-options="{ debounce: 500, getterSetter: true }">
+    </div>
+  </div>
+
+  <p ng-if="!placeCpnt.events.searching && !placeCpnt.places.length && placesForm.$dirty">
+    Aucun lieux trouvé
+  </p>
+  <div class="masonry-layout" ng-if="placeCpnt.places.length">
+    <div class="masonry-layout-brick component-place"
+         ng-repeat="place in placeCpnt.places track by place.id"
+         ng-click="placeCpnt.setPlace(place)">
+      <div class="component-place-title">{{ place.name }}</div>
+      <div class="component-place-place">
+        {{ place.address }} {{ place.zipCode }} {{ place.city }}
+      </div>
+      <p class="component-place-error">
+        <span ng-if="!placeCpnt.hasLink(place)">
+          Ce lieux n'est associé à aucun équipement ou n'a pas de lien valide.<br>
+        </span>
+        <span ng-if="!placeCpnt.hasCoordinates(place)">
+          Les coordonnées de ce lieux ne sont pas valides.<br>
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-danger" ng-if="placeCpnt.showDelete" ng-click="placeCpnt.delete()">
+    Supprimer
+  </button>
+</div>

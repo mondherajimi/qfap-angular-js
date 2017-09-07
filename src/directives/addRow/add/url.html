@@ -1,0 +1,6 @@
+<div class="form-group" show-errors>
+  <label for="{{$column.field}}" class="sr-only">{{$column.title}}</label>
+  <input type="url" name="{{$column.field}}" id="{{$column.field}}"
+         class="form-control input-sm"
+         ng-model="params.parameters().addRow[$column.field]" ng-required="$column.required"/>
+</div>
